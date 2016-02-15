@@ -2,16 +2,18 @@ import path from 'path';
 import fs from 'fs';
 import assert from 'assert';
 import { transformFileSync } from 'babel-core';
+import normalize from 'normalize-newline';
 import plugin from '../src';
 
 function trim(str) {
-  return str.replace(/^\s+|\s+$/, '');
+  return normalize(str.replace(/^\s+|\s+$/, ''));
 }
 
 describe('mocktail babel plugin', () => {
   const fixturesDir = path.join(__dirname, 'fixtures');
+
   fs.readdirSync(fixturesDir).map((caseName) => {
-    it(`should ${caseName.split('-').join(' ')}`, () => {
+    it(`should mock ${caseName.split('-').join(' ')}`, () => {
       const fixtureDir = path.join(fixturesDir, caseName);
       const actualPath = path.join(fixtureDir, 'actual.js');
       const actual = transformFileSync(actualPath).code;
@@ -23,4 +25,5 @@ describe('mocktail babel plugin', () => {
       assert.equal(trim(actual), trim(expected));
     });
   });
+
 });
