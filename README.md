@@ -1,13 +1,45 @@
-# babel-plugin-mocktail
-[![NPM](https://img.shields.io/npm/v/babel-plugin-mocktail.svg?style=flat)](https://www.npmjs.com/package/babel-plugin-mocktail)
-[![Build Status](https://travis-ci.org/nhz-io/babel-plugin-mocktail.svg?branch=master)](https://travis-ci.org/nhz-io/babel-plugin-mocktail)
-[![Coverage Status](https://coveralls.io/repos/github/nhz-io/babel-plugin-mocktail/badge.svg?branch=master)](https://coveralls.io/github/nhz-io/babel-plugin-mocktail?branch=master)
-[![bitHound Overall Score](https://www.bithound.io/github/nhz-io/babel-plugin-mocktail/badges/score.svg)](https://www.bithound.io/github/nhz-io/babel-plugin-mocktail)
+<h1 align="center">babel-plugin-mocktail</h1>
 
+<p align="center">
+  <a href="https://npmjs.org/package/babel-plugin-mocktail">
+    <img src="https://img.shields.io/npm/v/babel-plugin-mocktail.svg?style=flat"
+         alt="NPM Version">
+  </a>
 
-[Mocktail](https://github.com/Wildhoney/Mocktail) babel plugin
+  <a href="https://coveralls.io/r/nhz-io/babel-plugin-mocktail">
+    <img src="https://img.shields.io/coveralls/nhz-io/babel-plugin-mocktail.svg?style=flat"
+         alt="Coverage Status">
+  </a>
 
-Will mock all your ES6 exports.
+  <a href="https://www.bithound.io/github/nhz-io/babel-plugin-mocktail">
+    <img src="https://www.bithound.io/github/nhz-io/babel-plugin-mocktail/badges/score.svg"
+         alt="Bithound Status">
+  </a>
+
+  <a href="https://travis-ci.org/nhz-io/babel-plugin-mocktail">
+    <img src="https://img.shields.io/travis/nhz-io/babel-plugin-mocktail.svg?style=flat"
+         alt="Build Status">
+  </a>
+
+  <a href="https://npmjs.org/package/babel-plugin-mocktail">
+    <img src="http://img.shields.io/npm/dm/babel-plugin-mocktail.svg?style=flat"
+         alt="Downloads">
+  </a>
+
+  <a href="https://david-dm.org/nhz-io/babel-plugin-mocktail.svg">
+    <img src="https://david-dm.org/nhz-io/babel-plugin-mocktail.svg?style=flat"
+         alt="Dependency Status">
+  </a>
+
+  <a href="https://github.com/nhz-io/babel-plugin-mocktail/blob/master/LICENSE">
+    <img src="https://img.shields.io/npm/l/babel-plugin-mocktail.svg?style=flat"
+         alt="License">
+  </a>
+</p>
+
+<p align="center">
+Mock all your ES6 exports with [Mocktail](https://github.com/Wildhoney/Mocktail)
+</p>
 
 ## Example
 
