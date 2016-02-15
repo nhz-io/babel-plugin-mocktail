@@ -1,5 +1,5 @@
 # babel-plugin-mocktail
-[![NPM](https://img.shields.io/npm/v/sass2styl.svg?style=flat)](https://www.npmjs.com/package/babel-plugin-mocktail)
+[![NPM](https://img.shields.io/npm/v/babel-plugin-mocktail.svg?style=flat)](https://www.npmjs.com/package/babel-plugin-mocktail)
 [![Build Status](https://travis-ci.org/nhz-io/babel-plugin-mocktail.svg?branch=master)](https://travis-ci.org/nhz-io/babel-plugin-mocktail)
 [![Coverage Status](https://coveralls.io/repos/github/nhz-io/babel-plugin-mocktail/badge.svg?branch=master)](https://coveralls.io/github/nhz-io/babel-plugin-mocktail?branch=master)
 [![bitHound Overall Score](https://www.bithound.io/github/nhz-io/babel-plugin-mocktail/badges/score.svg)](https://www.bithound.io/github/nhz-io/babel-plugin-mocktail)
