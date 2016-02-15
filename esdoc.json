@@ -1,0 +1,21 @@
+{
+  "source": "./src",
+  "destination": "./doc",
+  "includes": ["\\.(js|es6)$"],
+  "excludes": ["\\.config\\.(js|es6)$"],
+  "access": ["public", "protected", "private"],
+  "unexportIdentifier": false,
+  "undocumentIdentifier": true,
+  "builtinExternal": true,
+  "index": "./README.md",
+  "package": "./package.json",
+  "coverage": true,
+  "includeSource": true,
+  "test": {
+    "type": "mocha",
+    "source": "./test",
+    "includes": ["\\.(js|es6)$"],
+    "excludes": ["\\.config\\.(js|es6)$"]
+  },
+  "lint": true
+}
