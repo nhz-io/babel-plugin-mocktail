@@ -1,21 +1,23 @@
 # babel-plugin-mocktail
+[![Build Status](https://travis-ci.org/nhz-io/babel-plugin-mocktail.svg?branch=master)](https://travis-ci.org/nhz-io/babel-plugin-mocktail)
 
-mocktail babel plugin
+[Mocktail](https://github.com/Wildhoney/Mocktail) babel plugin
+
+Will mock all your ES6 exports.
 
 ## Example
 
 **In**
 
 ```js
-// input code
+export default {}
 ```
 
 **Out**
 
 ```js
-"use strict";
-
-// output code
+import { mock as _mock } from "mocktail";
+export default _mock({});
 ```
 
 ## Installation

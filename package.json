@@ -17,6 +17,7 @@
     "clean": "rm -rf lib",
     "build": "babel src -d lib",
     "test": "mocha --require babel-core/register",
+    "travis": "npm run-script clean && npm run-script build && npm run-script test",
     "test:watch": "npm run test -- --watch",
     "prepublish": "npm run clean && npm run build"
   },
