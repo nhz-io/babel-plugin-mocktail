@@ -12,15 +12,20 @@
     "babel-preset-stage-0": "^6.3.13",
     "mocha": "^2.2.5",
     "mocktail": "^0.3.8",
-    "normalize-newline": "^2.0.0"
+    "normalize-newline": "^2.0.0",
+    "isparta": "~4.0.0",
+    "coveralls": "~2.11.6"
   },
   "scripts": {
     "clean": "rm -rf lib",
     "build": "babel src -d lib",
     "test": "mocha --require babel-core/register",
-    "travis": "npm run-script clean && npm run-script build && npm run-script test",
+    "travis": "npm run-script clean && npm run-script build && npm run-script coveralls",
     "test:watch": "npm run test -- --watch",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run build",
+    "coverage": "babel-node node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha -- --reporter dot",
+    "coveralls": "npm run-script coverage -s && coveralls < coverage/lcov.info",
+    "postcoveralls": "rm -rf ./coverage"
   },
   "keywords": [
     "babel",
