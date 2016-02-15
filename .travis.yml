@@ -1,6 +1,7 @@
 env:
   global:
-    - GH_REF: github.com/nhz-io/babel-plugin-mocktail
+  - GH_REF: github.com/nhz-io/babel-plugin-mocktail
+  - secure: 0KhhWu6w3q0U4oO2Eq6e5RpanmuK8OkYUy6TNIef81fuVnTQx7yDiOEO0h8pnt2uH6cBLcHNhq4zOSeNxUHfjB+PqjwH5+4kfG59kiGv6i5H33W9qjzZGQMem1H0ceZXJfRIKOLLAxROuaHcwZbMWT+4UDOVsUn3JEGsb84/4lII6mtlukAU9R9g7EDg/R304wWvz/dKVSgbmTH7m4HChVV6xnn9cLzIMh5yrknrxDfi/OKbutb/fvj4PU7FlbxLQFIgSYO/QAjHvoVgc2gQs11NnkD7Zyct7cOYF/kmCPAGvyaTiqdaUnq0nYJd/HU87THAUikYKYo7WmJ0Rnd9luSuGKmsaKhWJ5XeH2lplmEQSCOz6CfIenJbxp13V9qo/KOeleQCfhcUTNMjyxXbdkI9nOUbu0+YJb7tR/B/aMRmc1VOyrRxOBZ3nnSTm6scSF4/KWPVkN5tA5EIwir6of2bdni8f6pMbbKNArTSrQbGbLphosoRJnECfSIAXFid76Qdi1FkqYXDiOkHN1XjIFZ6fSN2jLf0Vr7Nd6pZTvZvFKBWyiT3IykjKM5l1xjTH0cpPfhvLPBJGF5jbhqJ/+CFUSxLPoIgGYU1n1FCIajH9jDpr/1aheYhjQzdHjWtBM1O2VpvQ1YKHGb1zJpsS2+j7qIXOlDkHWqoobPbnqQ=
 language: node_js
 node_js:
 - '4.2'
@@ -14,6 +15,5 @@ deploy:
   on:
     repo: nhz-io/babel-plugin-mocktail
     branch: master
-
   after_deploy:
   - bash ./gh-pages.sh
