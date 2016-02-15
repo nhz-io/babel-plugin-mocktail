@@ -27,5 +27,6 @@
     "mocktail",
     "babel-plugin",
     "babel-plugin-mocktail"
-  ]
+  ],
+  "license": "MIT"
 }
