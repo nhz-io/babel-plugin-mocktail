@@ -1,4 +1,5 @@
 {
+  "name": "babel-plugin-mocktail",
   "version": "0.0.0",
   "description": "mocktail babel plugin",
   "repository": "nhz-io/babel-plugin-mocktail",
