@@ -1,19 +1,12 @@
 /**
- * @module ProgramVisitor.js
- * @author Ishi Ruy
- * @see https://github.com/nhz-io/babel-plugin-mocktail
- */
-
-/**
- * @class ProgramVisitor
- */
+  * @example
+  * const Program = new ProgramVisitor()
+  */
 export default class ProgramVisitor {
   /**
-   * @method enter
-   * @param {Object} path
-   * @param {Object} state
-   * @return {*}
-   */
+    * @param {Object} path
+    * @param {Object} state
+    */
   enter(path, state) {
 
   };

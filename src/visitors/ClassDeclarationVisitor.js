@@ -1,19 +1,12 @@
 /**
- * @module ClassDeclarationVisitor.js
- * @author Ishi Ruy
- * @see https://github.com/nhz-io/babel-plugin-mocktail
- */
-
-/**
- * @class ClassDeclarationVisitor
- */
+  * @example
+  * const ClassDeclaration = new ClassDeclarationVisitor()
+  */
 export default class ClassDeclarationVisitor {
   /**
-   * @method enter
-   * @param {Object} path
-   * @param {Object} state
-   * @return {*}
-   */
+    * @param {Object} path
+    * @param {Object} state
+    */
   enter(path, state) {
 
   };

@@ -1,19 +1,12 @@
 /**
- * @module ExportDefaultDeclarationVisitor.js
- * @author Ishi Ruy
- * @see https://github.com/nhz-io/babel-plugin-mocktail
- */
-
-/**
- * @class ExportDefaultDeclarationVisitor
- */
+  * @example
+  * const ExportDefaultDeclaration = ExportDefaultDeclarationVisitor()
+  */
 export default class ExportDefaultDeclarationVisitor {
   /**
-   * @method enter
-   * @param {Object} path
-   * @param {Object} state
-   * @return {*}
-   */
+    * @param {Object} path
+    * @param {Object} state
+    */
   enter(path, state) {
 
   };
