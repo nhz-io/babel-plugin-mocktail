@@ -1,5 +1,5 @@
 /**
-  * @example
+  * @example  
   * const ClassDeclaration = new ClassDeclarationVisitor()
   */
 export default class ClassDeclarationVisitor {
