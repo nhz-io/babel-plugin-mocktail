@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-Mock all your ES6 exports with [Mocktail](https://github.com/Wildhoney/Mocktail)
+Mock all your ES6 exports with <a href="https://github.com/Wildhoney/Mocktail">Mocktail</a>
 </p>
 
 ## Example
