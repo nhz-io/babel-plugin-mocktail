@@ -47,7 +47,8 @@
     "patch": "npm version patch && npm publish",
     "minor": "npm version minor && npm publish",
     "major": "npm version major && npm publish",
-    "toc": "doctoc --github --title \"# Changelog\" CHANGELOG.md"
+    "toc": "doctoc --github --title \"# Changelog\" CHANGELOG.md",
+    "doc": "node node_modules/.bin/esdoc -c esdoc.json"
   },
   "config": {
     "ghooks": {
