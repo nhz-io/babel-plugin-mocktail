@@ -15,5 +15,5 @@ deploy:
   on:
     repo: nhz-io/babel-plugin-mocktail
     branch: master
-  after_deploy:
-  - bash ./gh-pages.sh
+after_deploy:
+- bash ./gh-pages.sh
