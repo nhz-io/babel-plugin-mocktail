@@ -19,8 +19,8 @@ describe('mocktail babel plugin', () => {
       const actual = transformFileSync(actualPath, {
         "presets": [null],
         "plugins": [
-          ["../../../src"]
-        ]
+          ["../../../src"],
+        ],
       }).code;
 
       const expected = fs.readFileSync(

@@ -18,8 +18,8 @@ module.exports = function(babel) {
               childPath.node.declaration = t.callExpression(
                 mockLocalIdentifier,
                 [ declaration ]
-              );
-              break;
+              )
+              break
 
             case childPath.isExportNamedDeclaration():
               specifiers = childPath.node.specifiers;
@@ -63,7 +63,7 @@ module.exports = function(babel) {
         });
 
       }
-    }
+    },
   }
 
   return { visitor: ProgramVisitor }
