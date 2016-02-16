@@ -1,14 +1,14 @@
 module.exports = function(babel) {
-  var t = babel.types;
+  let t = babel.types;
   const ProgramVisitor = {
     Program: function(path) {
-      var declaration, specifiers, mockedExportIdentifier;
-      var body = path.get('body');
+      let declaration, specifiers, mockedExportIdentifier;
+      let body = path.get('body');
       if(body[0]) {
 
-        var mocktail = t.stringLiteral("mocktail");
-        var mockLocalIdentifier = path.scope.generateUidIdentifier("mock");
-        var mockImportSpecifier = t.importSpecifier(mockLocalIdentifier, t.identifier("mock"));
+        let mocktail = t.stringLiteral("mocktail");
+        let mockLocalIdentifier = path.scope.generateUidIdentifier("mock");
+        let mockImportSpecifier = t.importSpecifier(mockLocalIdentifier, t.identifier("mock"));
         body[0].insertBefore(t.importDeclaration([mockImportSpecifier], mocktail));
 
         body.forEach(function(childPath) {
