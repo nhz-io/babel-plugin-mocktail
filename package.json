@@ -17,6 +17,7 @@
     "babel-eslint": "^4.1.8",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
+    "chai": "^3.5.0",
     "coveralls": "~2.11.6",
     "dependency-check": "^2.5.1",
     "esdoc": "^0.4.5",
@@ -25,7 +26,8 @@
     "isparta": "~4.0.0",
     "mocha": "^2.2.5",
     "mocktail": "^0.3.8",
-    "normalize-newline": "^2.0.0"
+    "normalize-newline": "^2.0.0",
+    "sinon": "^1.17.3"
   },
   "scripts": {
     "clean": "rm -rf lib doc coverage",
