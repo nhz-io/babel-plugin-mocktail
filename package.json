@@ -27,7 +27,7 @@
     "mocha": "^2.2.5",
     "mocktail": "^0.3.8",
     "normalize-newline": "^2.0.0",
-    "sinon": "^1.17.3"
+    "sinon-chai": "^2.8.0"
   },
   "scripts": {
     "clean": "rm -rf lib doc coverage",
