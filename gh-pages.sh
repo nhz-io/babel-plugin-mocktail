@@ -1,11 +1,10 @@
 #!/bin/bash
 set -e
-
-rm -rf doc || exit 0;
+rm -rf doc || exit 0
 
 esdoc -c esdoc.json
-
 cd doc
+
 git init
 
 git config --local user.name "Travis CI"
