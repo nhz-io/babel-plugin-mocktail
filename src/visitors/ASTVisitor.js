@@ -1,5 +1,4 @@
 /**
-  * @interface
   * @example
   * class Visitor extends ASTVisitor {
   *   enter(path, state) { ... }
@@ -9,12 +8,12 @@
 export default class ASTVisitor {
 
   /** Create instance of ASTVisitor and store visitors for nested traversing
-    * @param {...ASTVisitor} nestedVisitors
+    * @param {Object} nestedVisitors
     */
-  constructor(...nestedVisitors) {
+  constructor(nestedVisitors) {
 
-    /** @type {ASTVisitor[]} */
-    this.nestedVisitors = nestedVisitors
+    /** @type {Object} */
+    this.nestedVisitors = Object.assign({}, nestedVisitors)
   }
 
   /** Visit path

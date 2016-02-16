@@ -5,9 +5,20 @@ import ASTVisitor from "../../../src/visitors/ASTVisitor"
 describe("ASTVisitor", () => {
 
   /** @test {ASTVisitor#constructor} */
-  describe("#constructor(...nestedVisitors)", () => {
-    it("returns an instance of ASTVisitor", () => {
-      should(new ASTVisitor()).be.an.instanceOf(ASTVisitor)
+  describe("#constructor(nestedVisitors)", () => {
+    let visitor;
+    beforeEach(() => visitor = new ASTVisitor)
+
+    it("returns an instance of ASTVisitor", () => visitor.should.be.an.instanceOf(ASTVisitor))
+
+    it("populates ASTVisitor~nestedVisitors from the first argument", () => {
+      const One = {}, Two = {}, nestedVisitors = { One, Two }
+
+      visitor = new ASTVisitor(nestedVisitors)
+      visitor.nestedVisitors.should.be.ok
+      visitor.nestedVisitors.should.not.be.equal(nestedVisitors)
+      visitor.nestedVisitors.One.should.be.equal(One)
+      visitor.nestedVisitors.Two.should.be.equal(Two)
     })
   })
 
