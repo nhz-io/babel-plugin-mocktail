@@ -41,7 +41,7 @@ describe("ProgramVisitor", () => {
       "name"    : String,
       "path"    : String,
       "imports" : Array,
-      "exports" : Array
+      "exports" : Array,
     }
     beforeEach(() => visitor = new ProgramVisitor())
 
