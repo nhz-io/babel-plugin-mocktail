@@ -3,6 +3,9 @@ import ASTVisitor from "./ASTVisitor"
 /**
   * @example
   * const visitor = new ClassDeclarationVisitor(nestedVisitors)
+  * @see https://github.com/babel/babel/blob/master/doc/ast/spec.md#classdeclaration
+  * @see https://github.com/babel/babel/tree/master/packages/babel-types#tclassdeclarationid-superclass-body-decorators
+  * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/es2015.js#L62
   */
 export default class ClassDeclarationVisitor extends ASTVisitor {
 

@@ -3,6 +3,9 @@ import ASTVisitor from "./ASTVisitor"
 /**
   * @example
   * const visitor = new ExportNamedDeclarationVisitor(nestedVisitors)
+  * @see https://github.com/babel/babel/blob/master/doc/ast/spec.md#exportnameddeclaration
+  * @see https://github.com/babel/babel/tree/master/packages/babel-types#texportnameddeclarationdeclaration-specifiers-source
+  * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/es2015.js#L133
   */
 export default class ExportNamedDeclarationVisitor extends ASTVisitor {
 

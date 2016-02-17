@@ -3,6 +3,9 @@ import ASTVisitor from "./ASTVisitor"
 /**
   * @example
   * const visitor = new ExportAllDeclarationsVisitor(nestedVisitors)
+  * @see https://github.com/babel/babel/blob/master/doc/ast/spec.md#exportalldeclaration
+  * @see https://github.com/babel/babel/tree/master/packages/babel-types#texportalldeclarationsource
+  * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/es2015.js#L113
   */
 export default class ExportAllDeclarationsVisitor extends ASTVisitor {
 
