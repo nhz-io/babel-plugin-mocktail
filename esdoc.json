@@ -3,7 +3,6 @@
   "destination": "./doc",
   "includes": ["\\.(js|es6)$"],
   "excludes": ["\\.config\\.(js|es6)$"],
-  "access": ["public", "protected", "private"],
   "unexportIdentifier": false,
   "undocumentIdentifier": true,
   "builtinExternal": true,

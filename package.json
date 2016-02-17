@@ -4,7 +4,7 @@
   "description": "mocktail babel plugin",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nhz-io/babel-plugin-mocktail.git"
+    "url": "https://github.com/nhz-io/babel-plugin-mocktail.git"
   },
   "author": "Ishi Ruy <dev@nhz.io>",
   "main": "lib/index.js",
