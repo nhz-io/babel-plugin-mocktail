@@ -39,7 +39,8 @@ describe("ProgramVisitor", () => {
     let visitor
     const properties = {
       "name"    : String,
-      "path"    : String,
+      "absPath" : String,
+      "relPath" : String,
       "imports" : Array,
       "exports" : Array,
     }
@@ -62,9 +63,17 @@ describe("ProgramVisitor", () => {
 
     it('sets the ~state.name property')
 
-    it('sets the ~state.path property')
+    it('sets the ~state.absPath property')
+
+    it('sets the ~state.relPath property')
+
+    it('initializes the ~state.import property')
+
+    it('initializes the ~state.exports property')
 
     it('traverses nested visitors')
+
+    it('passes the state to nested visitors while traversing')
   })
 
   describe("#exit(path, state)", () => {
