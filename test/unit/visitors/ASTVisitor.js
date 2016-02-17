@@ -9,9 +9,9 @@ describe("ASTVisitor", () => {
     let visitor;
     beforeEach(() => visitor = new ASTVisitor)
 
-    it("returns an instance of ASTVisitor", () => visitor.should.be.an.instanceOf(ASTVisitor))
+    it("creates an instance of ASTVisitor", () => visitor.should.be.an.instanceOf(ASTVisitor))
 
-    it("populates ASTVisitor~nestedVisitors from the first argument", () => {
+    it("sets ~nestedVisitors", () => {
       const One = {}, Two = {}, nestedVisitors = { One, Two }
 
       visitor = new ASTVisitor(nestedVisitors)
@@ -24,14 +24,14 @@ describe("ASTVisitor", () => {
 
   /** @test {ASTVisitor#enter} */
   describe("#enter", () => {
-    it("should throw a SyntaxError", () => {
+    it("throws a SyntaxError", () => {
       should(() => (new ASTVisitor).enter()).throw(SyntaxError)
     })
   })
 
   /** @test {ASTVisitor#exit} */
   describe("#exit", () => {
-    it("should throw a SyntaxError", () => {
+    it("throws a SyntaxError", () => {
       should(() => (new ASTVisitor).exit()).throw(SyntaxError)
     })
   })
