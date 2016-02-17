@@ -47,7 +47,7 @@ describe("ProgramVisitor", () => {
 
     Object.keys(properties).forEach((name) => {
       const type = properties[name]
-      it(`has a property '${name}' of type '${type.name}'`, () => {
+      it(`has '${name}' x of type '${type.name}'`, () => {
         let value = visitor.state[name]
         assert((value instanceof type) || (typeof(value) === type.name.toLowerCase()))
       })
