@@ -15,7 +15,7 @@ export default class ProgramVisitor extends ASTVisitor {
 
   constructor(...args) {
     super(...args)
-    this.state = { name: "", path: "", imports: [], exports: [] }
+    this.state = { name: "", absPath: "", relPath: "", imports: [], exports: [] }
   }
 
   enter(path, state) {
