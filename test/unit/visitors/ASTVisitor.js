@@ -1,5 +1,7 @@
-import should from "should"
+import {Should, expect, assert} from "chai"
 import ASTVisitor from "../../../src/visitors/ASTVisitor"
+
+Should()
 
 /** @test {ASTVisitor} */
 describe("ASTVisitor", () => {
@@ -25,14 +27,14 @@ describe("ASTVisitor", () => {
   /** @test {ASTVisitor#enter} */
   describe("#enter", () => {
     it("throws a SyntaxError", () => {
-      should(() => (new ASTVisitor).enter()).throw(SyntaxError)
+      expect(() => (new ASTVisitor).enter()).to.throw(SyntaxError)
     })
   })
 
   /** @test {ASTVisitor#exit} */
   describe("#exit", () => {
     it("throws a SyntaxError", () => {
-      should(() => (new ASTVisitor).exit()).throw(SyntaxError)
+      expect(() => (new ASTVisitor).exit()).to.throw(SyntaxError)
     })
   })
 })
