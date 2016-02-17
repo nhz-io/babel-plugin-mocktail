@@ -1,8 +1,10 @@
+import ASTVisitor from "./ASTVisitor"
+
 /**
   * @example
   * const visitor = new {CLASS}(nestedVisitors)
   */
-export default class {CLASS} {
+export default class {CLASS} extends ASTVisitor {
 
   /** Create an instance of {CLASS}
     * @param {Object} nestedVisitors
