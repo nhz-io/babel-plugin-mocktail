@@ -123,6 +123,7 @@ describe("ProgramVisitor", () => {
     })
   })
 
+  /** @test {ProgramVisitor#exit} */
   describe("#exit(path, state)", () => {
     it('patches the AST')
   })
