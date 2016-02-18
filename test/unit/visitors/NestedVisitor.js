@@ -35,7 +35,7 @@ describe("NestedVisitor", () => {
 
   })
 
-  /** @test {NestedVisitor#enter} */  
+  /** @test {NestedVisitor#enter} */
   describe("#enter(path, state)", () => {
     let visitor, nestedVisitors, pathMock, stateMock
     beforeEach(() => {
@@ -66,7 +66,7 @@ describe("NestedVisitor", () => {
       expect(() => visitor.enter(null)).to.throw(TypeError)
     })
 
-    it('throws TypeError when no `path.parent`', () => {
+    it('throws `TypeError` when no `path.parent`', () => {
       pathMock.parent = null
       expect(() => visitor.enter(pathMock, {})).to.throw(TypeError)
     })
