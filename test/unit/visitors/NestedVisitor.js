@@ -54,7 +54,7 @@ describe("NestedVisitor", () => {
           path: "test.js",
           name: "test",
           module: "test",
-        }
+        },
       }
     })
 

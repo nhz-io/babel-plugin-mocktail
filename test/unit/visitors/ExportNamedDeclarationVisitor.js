@@ -52,7 +52,7 @@ describe("ExportNamedDeclarationVisitor", () => {
           path: "test.js",
           name: "test",
           module: "test",
-        }
+        },
       }
     })
 
@@ -127,7 +127,7 @@ describe("ExportNamedDeclarationVisitor", () => {
           path: "test.js",
           name: "test",
           module: "test",
-        }
+        },
       }
     })
 
