@@ -48,19 +48,15 @@ export default class ASTVisitorTests {
   }
 }
 
-if(!module.parent) {
+/** @test {ASTVisitor} */
+describe("ASTVisitor", () => {
+  const suite = new ASTVisitorTests()
+  /** @test {ASTVisitor#constructor} */
+  suite.testConstructor()
 
-  /** @test {ASTVisitor} */
-  describe("ASTVisitor", () => {
-    const suite = new ASTVisitorTests()
-    /** @test {ASTVisitor#constructor} */
-    suite.testConstructor()
+  /** @TEST {ASTVisitor#enter} */
+  suite.testEnter()
 
-    /** @TEST {ASTVisitor#enter} */
-    suite.testEnter()
-
-    /** @TEST {ASTVisitor#exit} */
-    suite.testExit()
-  })
-
-}
+  /** @TEST {ASTVisitor#exit} */
+  suite.testExit()
+})
