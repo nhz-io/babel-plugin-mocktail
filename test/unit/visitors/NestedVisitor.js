@@ -64,33 +64,30 @@ export default class NestedVisitorTests {
       })
 
       it('throws `TypeError` when `state.mocktail.path` is invalid', () => {
-        let _state = Object.assign({}, state)
-        _state.mocktail.path = null
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.path = ""
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.path = {}
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        state.mocktail.path = null
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.path = ""
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.path = {}
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
       })
 
       it('throws `TypeError` when `state.mocktail.name` is invalid', () => {
-        let _state = Object.assign({}, state)
-        _state.mocktail.name = null
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.name = ""
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.name = {}
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        state.mocktail.name = null
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.name = ""
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.name = {}
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
       })
 
       it('throws `TypeError` when `state.mocktail.module` is invalid', () => {
-        let _state = Object.assign({}, state)
-        _state.mocktail.module = null
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.module = ""
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
-        _state.mocktail.module = {}
-        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        state.mocktail.module = null
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.module = ""
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
+        state.mocktail.module = {}
+        expect(() => visitor.enter(path, state)).to.throw(TypeError)
       })
     })
   }
