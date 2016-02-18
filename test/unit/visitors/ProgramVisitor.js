@@ -44,9 +44,9 @@ describe("ProgramVisitor", () => {
         traverse: sinon.spy(),
         parent: {
           type: "File",
-          hub: { opts: { filename: "test.js" } }
-          }
-        }
+          hub: { opts: { filename: "test.js" } },
+        },
+      }
       stateMock = {}
     })
 
