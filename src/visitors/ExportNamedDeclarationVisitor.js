@@ -1,4 +1,4 @@
-import ASTVisitor from "./ASTVisitor"
+import NestedVisitor from './NestedVisitor'
 
 /**
   * @example
@@ -7,32 +7,24 @@ import ASTVisitor from "./ASTVisitor"
   * @see https://github.com/babel/babel/tree/master/packages/babel-types#texportnameddeclarationdeclaration-specifiers-source
   * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/es2015.js#L133
   */
-export default class ExportNamedDeclarationVisitor extends ASTVisitor {
+export default class ExportNamedDeclarationVisitor extends NestedVisitor {
 
-  /** Create an instance of ExportNamedDeclarationVisitor
-    * @param {Object} nestedVisitors
-    */
-  constructor(...args) {
-    super(...args)
-    /** @type {Object} */
-
-  }
-
-  /** Visit path
-    * @abstract
+  /** Visit Program node
     * @param {Object} path
     * @param {Object} state
     */
   enter(path, state) {
-    path.traverse(this.nestedVisitors, state)
+    super.enter(path, state)
+
+    switch(true) {
+      case path.parent.type !== 'Program':
+        throw(new Error('Invalid `path.parent`'))
+        break
+    }
+
+    if(Object.keys(this.nestedVisitors).length) {
+      path.traverse(this.nestedVisitors, state)
+    }
   }
 
-  /** Leave path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  exit(path, state) {
-
-  }
 }
