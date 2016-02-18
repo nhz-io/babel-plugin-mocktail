@@ -2,113 +2,109 @@ import sinon from "sinon"
 import sinonChai from "sinon-chai"
 import chai, {Should, expect, assert} from "chai"
 
-import ASTVisitor from "../../../src/visitors/ASTVisitor"
+import PathMock from "../../mocks/visitors/PathMock"
+import StateMock from "../../mocks/visitors/StateMock"
+
 import NestedVisitor from "../../../src/visitors/NestedVisitor"
+import ASTVisitorTests from "./ASTVisitor"
 
 Should()
 chai.use(sinonChai)
 
+const NAME  = "NestedVisitor"
+const CLASS = NestedVisitor
+
+export default class NestedVisitorTests {
+  constructor({NAME, CLASS} = {}) {
+    this.NAME = NAME || "NestedVisitor"
+    this.CLASS = CLASS || NestedVisitor
+  }
+
+  testConstructor() {
+    const { NAME, CLASS } = this
+    describe("#constructor(nestedVisitors)" , () => {
+      let visitor;
+      beforeEach(() => visitor = new CLASS())
+
+      it("creates an instance of NestedVisitor", () => visitor.should.be.an.instanceOf(NestedVisitor))
+    })
+  }
+
+  testEnter({parent}) {
+    const {CLASS} = this
+    describe("#enter(path, state)", () => {
+      let path, state, visitor
+      beforeEach(() => {
+        visitor = new CLASS({ Test: {} })
+        path = new PathMock({parent})
+        state = new StateMock()
+      })
+
+      it('throws `TypeError` when no `path` is passed', () => {
+        expect(() => visitor.enter()).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` if `path` is invalid', () => {
+        expect(() => visitor.enter(null)).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when no `path.parent`', () => {
+        expect(() => visitor.enter({parent:null}, {})).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when no `state` is passed', () => {
+        expect(() => visitor.enter(path)).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when `state` is invalid', () => {
+        const path = new
+        expect(() => visitor.enter(path, null)).to.throw(TypeError)
+        expect(() => visitor.enter(path, {})).to.throw(TypeError)
+        expect(() => visitor.enter(path, {mocktail:null})).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when `state.mocktail.path` is invalid', () => {
+        let _state = Object.assign({}, state)
+        _state.mocktail.path = null
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.path = ""
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.path = {}
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when `state.mocktail.name` is invalid', () => {
+        let _state = Object.assign({}, state)
+        _state.mocktail.name = null
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.name = ""
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.name = {}
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+      })
+
+      it('throws `TypeError` when `state.mocktail.module` is invalid', () => {
+        let _state = Object.assign({}, state)
+        _state.mocktail.module = null
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.module = ""
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+        _state.mocktail.module = {}
+        expect(() => visitor.enter(path, _state)).to.throw(TypeError)
+      })
+    })
+  }
+}
+
 /** @test {NestedVisitor} */
 describe("NestedVisitor", () => {
-  let visitor
-  beforeEach(() => visitor = new NestedVisitor())
+  const astVisitorSuite = new ASTVisitorTests({NAME, CLASS})
+  const nestedVisitorSuite = new NestedVisitorTests({NAME, CLASS})
 
-  it('is a subclass of ASTVisitor', () => {
-    NestedVisitor.prototype.should.be.an.instanceof(ASTVisitor)
-  })
-
-  it("creates an instance of NestedVisitor", () => visitor.should.be.an.instanceOf(NestedVisitor))
-
-  /** @test {NestedVisitor#constructor} */
-  describe("#constructor", () => {
-    let visitor
-    beforeEach(() => visitor = new NestedVisitor())
-
-    it("populates ~nestedVisitors", () => {
-      const One = {}, Two = {}, nestedVisitors = { One, Two }
-
-      visitor = new NestedVisitor(nestedVisitors)
-      visitor.nestedVisitors.should.be.ok.and.not.be.equal(nestedVisitors)
-      visitor.nestedVisitors.One.should.be.equal(One)
-      visitor.nestedVisitors.Two.should.be.equal(Two)
-    })
-
-  })
+  /** @test {NestedVisitor#contructor} */
+  astVisitorSuite.testConstructor()
+  nestedVisitorSuite.testConstructor()
 
   /** @test {NestedVisitor#enter} */
-  describe("#enter(path, state)", () => {
-    let visitor, nestedVisitors, pathMock, stateMock
-    beforeEach(() => {
-      nestedVisitors = { Test: {} }
-      visitor = new NestedVisitor(nestedVisitors)
-      pathMock = {
-        traverse: sinon.spy(),
-        parent: {
-          type: "Program",
-        },
-      }
-      stateMock = {
-        mocktail: {
-          imports: [],
-          exports: [],
-          path: "test.js",
-          name: "test",
-          module: "test",
-        },
-      }
-    })
-
-    it('throws `TypeError` when no `path` is passed', () => {
-      expect(() => visitor.enter()).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` if `path` is invalid', () => {
-      expect(() => visitor.enter(null)).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` when no `path.parent`', () => {
-      pathMock.parent = null
-      expect(() => visitor.enter(pathMock, {})).to.throw(TypeError)
-    })
-
-
-    it('throws `TypeError` when no state is passed', () => {
-      expect(() => visitor.enter(pathMock)).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` when `state` is invalid', () => {
-      expect(() => visitor.enter(pathMock, null)).to.throw(TypeError)
-      expect(() => visitor.enter(pathMock, {})).to.throw(TypeError)
-      expect(() => visitor.enter(pathMock, {mocktail:null})).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` when `state.mocktail.path` is invalid', () => {
-      stateMock.mocktail.path = null
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.path = ""
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.path = {}
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` when `state.mocktail.name` is invalid', () => {
-      stateMock.mocktail.name = null
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.name = ""
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.name = {}
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-    })
-
-    it('throws `TypeError` when `state.mocktail.module` is invalid', () => {
-      stateMock.mocktail.module = null
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.module = ""
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-      stateMock.mocktail.module = {}
-      expect(() => visitor.enter(pathMock, stateMock)).to.throw(TypeError)
-    })
-
-  })
-
+  nestedVisitorSuite.testEnter({parent:'Program'})
 })
