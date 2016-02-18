@@ -19,6 +19,40 @@ export default class ProgramVisitor extends ASTVisitor {
   }
 
   enter(path, state) {
+    switch(true) {
+      case !path:
+        throw(new TypeError('Missing `path`'))
+        break
 
+      case !path.traverse:
+        throw(new TypeError('Invalid `path`'))
+        break
+
+      case !state:
+        throw(new TypeError('Missing `state`'))
+        break
+
+      case !path.parent:
+        throw(new Error('Missing `path.parent`'))
+        break
+
+      case path.parent.type !== 'File':
+        throw(new Error('Invalid `path.parent`'))
+        break
+    }
+
+    const { filename } = path.parent.hub.opts
+
+    state.mocktail = {
+      imports: [],
+      exports: [],
+      path: filename,
+      name: filename.replace(/^.+\//, '').replace(/\.[^/]+$/, ''),
+      module: filename.replace(/^.+\//, '').replace(/\.[^/]+$/, ''),
+    }
+
+    if(Object.keys(this.nestedVisitors).length) {
+      path.traverse(this.nestedVisitors, state)
+    }
   }
 }
