@@ -30,7 +30,7 @@ export default class NestedVisitorTests {
     })
   }
 
-  testEnter({parent}) {
+  testEnter({parent} = {}) {
     const {CLASS} = this
     describe("#enter(path, state)", () => {
       let path, state, visitor
