@@ -1,46 +1,62 @@
-import {Should, expect, assert} from "chai"
-import ASTVisitor from "../../../src/visitors/ASTVisitor"
+import chai, { expect } from "chai"
+import sinonChai from "sinon-chai"
+import sinon from "sinon"
+chai.Should()
+chai.use(sinonChai)
+
+import { transform, traverse } from "babel-core"
+
 import {CLASS} from "../../../src/visitors/{CLASS}"
 
-Should()
-
-/** @test {{CLASS}} */
 describe("{CLASS}", () => {
-  let visitor
-  beforeEach(() => visitor = new {CLASS}())
+  let spy, enter, path
 
-  it('is a subclass of ASTVisitor', () => {
-    {CLASS}.prototype.should.be.an.instanceof(ASTVisitor)
+  /** @test {CLASS} */
+  describe("{CLASS}#constructor(defaultState)", () => {
+    it("should return a function", () => {
+      expect(new {CLASS}()).to.be.an.instanceOf(Function)
+    })
   })
 
-  it("creates an instance of {CLASS}", () => visitor.should.be.an.instanceOf({CLASS}))
-
-  /** @test {{CLASS}#constructor} */
-  describe("#constructor", () => {
-    let visitor
-    beforeEach(() => visitor = new {CLASS}())
-
-    it("populates ~nestedVisitors", () => {
-      const One = {}, Two = {}, nestedVisitors = { One, Two }
-
-      visitor = new {CLASS}(nestedVisitors)
-      visitor.nestedVisitors.should.be.ok.and.not.be.equal(nestedVisitors)
-      visitor.nestedVisitors.One.should.be.equal(One)
-      visitor.nestedVisitors.Two.should.be.equal(Two)
+  /** @test {CLASS}#enter(path, state) - parent: ExportDefaultDeclaration */
+  describe("{CLASS}#enter(path, state) - parent: ExportDefaultDeclaration", () => {
+    /** @test using default state */
+    it("should export the identifier using default state", () => {
+      spy = sinon.spy()
+      enter = new {CLASS}({ export: spy })
+      path = transform("export default Test").ast._paths[0]
+      path.traverse({ enter })
+      spy.should.have.been.calledWith("Test", path.node.body[0].declaration)
     })
 
+    /** @test using provided state */
+    it("should export the identifier using provided state", () => {
+      spy = sinon.spy()
+      enter = new {CLASS}()
+      path = transform("export default Test").ast._paths[0]
+      path.traverse({ enter }, { export: spy })
+      spy.should.have.been.calledWith("Test", path.node.body[0].declaration)
+    })
   })
 
-  /** @test {{CLASS}#enter} */
-  describe("#enter(path, state)", () => {
-    let visitor
-    beforeEach(() => visitor = new {CLASS}())
+  /** @test {CLASS}#enter(path, state) - parent: InvalidType */
+  describe("{CLASS}#enter(path, state) - parent: InvalidType", () => {
+    /** @test using default state */
+    it("should not export anything using default state", () => {
+      spy = sinon.spy()
+      enter = new {CLASS}({ export: spy })
+      enter({ type: "Identifier", parent: { type: "InvalidType" } })
+      spy.should.not.have.been.called
+    })
 
-    it('traverses nested visitors')
+    /** @test using provided state */
+    it("should not export anything using provided state", () => {
+      spy = sinon.spy()
+      enter = new {CLASS}()
+      spy = sinon.spy()
+      enter = new {CLASS}({ export: spy })
+      enter({ type: "Identifier", parent: { type: "InvalidType" } }, { export: spy })
+      spy.should.not.have.been.called
+    })
   })
-
-  describe("#exit(path, state)", () => {
-
-  })
-
 })

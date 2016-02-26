@@ -1,35 +1,33 @@
-import ASTVisitor from "./ASTVisitor"
-
 /**
   * @example
-  * const visitor = new {CLASS}(nestedVisitors)
+  * const visitor = new {CLASS}Visitor({export: function(name, node) { ... }})
   */
-export default class {CLASS} extends ASTVisitor {
+export default class {CLASS}Visitor {
 
-  /** Create an instance of {CLASS}
-    * @param {Object} nestedVisitors
+  /**
+    * @static
+    * @type Array
     */
-  constructor(...args) {
-    super(...args)
-    /** @type {Object} */
+  static PARENTS = [
+    "ExportDefaultDeclaration",
+  ]
 
+  /** Create an {CLASS}Visitor with optional default state
+    * @param {Object}   defaultState                    - Default state for Visitor enter(path, state) method
+    * @param {Function} defaultState.export             - Default Exporter function
+    * @return {Function} enter                          - Visitor enter(path, state) method
+    */
+  constructor(defaultState = {}) {
+    return function enter(path, state = defaultState) {
+      if(path.type === "{CLASS}") {
+        for(let parent of {CLASS}Visitor.PARENTS) {
+          if(parent === path.parent.type) {
+            state.export(null, path.node)
+            return
+          }
+        }
+      }
+    }
   }
 
-  /** Visit path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  enter(path, state) {
-    path.traverse(this.nestedVisitors, state)
-  }
-
-  /** Leave path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  exit(path, state) {
-
-  }
 }
