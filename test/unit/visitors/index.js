@@ -1,5 +1,4 @@
-import chai, { expect } from "chai"
-chai.Should()
+import { expect } from "chai"
 
 import Visitors from "../../../src/visitors"
 
@@ -9,7 +8,7 @@ describe("Visitors", () => {
     describe("result", () => {
       let visitors
       beforeEach(() => visitors = new Visitors())
-      it("should be an Object", () => visitors.should.be.an.Object)
+      it("should be an Object", () => expect(visitors).to.be.ok.and.be.an.instanceOf(Object))
       it("should have IdentifierVisitor", () => expect(visitors.Identifier).to.be.an.instanceOf(Function))
       it("should have LiteralVisitor", () => expect(visitors.Literal).to.be.an.instanceOf(Function))
       it("should have FunctionDeclarationVisitor", () => expect(visitors.FunctionDeclaration).to.be.an.instanceOf(Function))
