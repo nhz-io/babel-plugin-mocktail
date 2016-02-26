@@ -1,38 +1,37 @@
-import ASTVisitor from "./ASTVisitor"
-
 /**
   * @example
-  * const visitor = new ClassDeclarationVisitor(nestedVisitors)
+  * const visitor = new ClassDeclarationVisitor({export: function(name, node) { ... }})
   * @see https://github.com/babel/babel/blob/master/doc/ast/spec.md#classdeclaration
   * @see https://github.com/babel/babel/tree/master/packages/babel-types#tclassdeclarationid-superclass-body-decorators
-  * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/es2015.js#L62
+  * @see https://github.com/babel/babel/5b89849f432cfc034860f495b5001039123e7754/master/packages/babel-types/src/definitions/es2015.js#L62
   */
-export default class ClassDeclarationVisitor extends ASTVisitor {
 
-  /** Create an instance of ClassDeclarationVisitor
-    * @param {Object} nestedVisitors
+export default class ClassDeclarationVisitor {
+
+  /**
+    * @static
+    * @type {Array}
     */
-  constructor(...args) {
-    super(...args)
-    /** @type {Object} */
+  static PARENTS = [
+    "ExportDefaultDeclaration",
+  ]
 
+  /** Create an ClassDeclarationVisitor with optional default state
+    * @param {Object}   defaultState                    - Default state for Visitor enter(path, state) method
+    * @param {Function} defaultState.export             - Default Exporter function
+    * @return {Function} enter                          - Visitor enter(path, state) method
+    */
+  constructor(defaultState = {}) {
+    return function enter(path, state = defaultState) {
+      if(path.type === "ClassDeclaration" && !path.id) {
+        for(let parent of ClassDeclarationVisitor.PARENTS) {
+          if(parent === path.parent.type) {
+            state.export(null, path.node)
+            return
+          }
+        }
+      }
+    }
   }
 
-  /** Visit path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  enter(path, state) {
-    path.traverse(this.nestedVisitors, state)
-  }
-
-  /** Leave path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  exit(path, state) {
-
-  }
 }
