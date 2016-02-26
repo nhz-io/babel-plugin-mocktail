@@ -16,5 +16,8 @@
     "includes": ["\\.(js|es6)$"],
     "excludes": ["\\.config\\.(js|es6)$"]
   },
-  "lint": true
+  "lint": true,
+  "plugins": [
+    {"name": "esdoc-es7-plugin"}
+  ]
 }

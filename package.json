@@ -20,6 +20,7 @@
     "chai": "*",
     "coveralls": "*",
     "esdoc": "*",
+    "esdoc-es7-plugin": "0.0.3",
     "eslint": "*",
     "ghooks": "*",
     "isparta": "*",

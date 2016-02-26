@@ -7,6 +7,10 @@
   */
 export default class IdentifierVisitor {
 
+  /**
+    * @static
+    * @type Array
+    */
   static PARENTS = [
     "ExportDefaultDeclaration",
     "ExportSpecifier",
@@ -15,6 +19,11 @@ export default class IdentifierVisitor {
     "VariableDeclarator",
   ]
 
+  /** Create an IdentifierVisitor with optional default state
+    * @param {Object}   defaultState                    - Default state for Visitor enter(path, state) method
+    * @param {Function} defaultState.export             - Default Exporter function
+    * @return {Function} enter                          - Visitor enter(path, state) method
+    */
   constructor(defaultState = {}) {
     return function enter(path, state = defaultState) {
       if(path.type === "Identifier") {
