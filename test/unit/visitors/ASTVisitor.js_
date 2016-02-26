@@ -1,3 +1,4 @@
+return
 import {Should, expect, assert} from "chai"
 import ASTVisitor from "../../../src/visitors/ASTVisitor"
 
