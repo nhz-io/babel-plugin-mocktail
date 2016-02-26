@@ -1,5 +1,3 @@
-import ASTVisitor from "./ASTVisitor"
-
 /**
   * @example
   * const visitor = new FunctionDeclarationVisitor(nestedVisitors)
@@ -7,32 +5,32 @@ import ASTVisitor from "./ASTVisitor"
   * @see https://github.com/babel/babel/tree/master/packages/babel-types#tfunctiondeclarationid-params-body-generator-async
   * @see https://github.com/babel/babel/blob/master/packages/babel-types/src/definitions/core.js#L246
   */
-export default class FunctionDeclarationVisitor extends ASTVisitor {
+export default class FunctionDeclarationVisitor {
 
-  /** Create an instance of FunctionDeclarationVisitor
-    * @param {Object} nestedVisitors
+  /**
+    * @static
+    * @type Array
     */
-  constructor(...args) {
-    super(...args)
-    /** @type {Object} */
+  static PARENTS = [
+    "ExportDefaultDeclaration",
+  ]
 
+  /** Create an FunctionDeclarationVisitor with optional default state
+    * @param {Object}   defaultState                    - Default state for Visitor enter(path, state) method
+    * @param {Function} defaultState.export             - Default Exporter function
+    * @return {Function} enter                          - Visitor enter(path, state) method
+    */
+  constructor(defaultState = {}) {
+    return function enter(path, state = defaultState) {
+      if(path.type === "FunctionDeclaration" && !path.id) {
+        for(let parent of FunctionDeclarationVisitor.PARENTS) {
+          if(parent === path.parent.type) {
+            state.export(null, path.node)
+            return
+          }
+        }
+      }
+    }
   }
 
-  /** Visit path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  enter(path, state) {
-    path.traverse(this.nestedVisitors, state)
-  }
-
-  /** Leave path
-    * @abstract
-    * @param {Object} path
-    * @param {Object} state
-    */
-  exit(path, state) {
-
-  }
 }
