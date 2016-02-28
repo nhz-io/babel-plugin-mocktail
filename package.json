@@ -15,7 +15,8 @@
     "babel-core": "^6.5.2",
     "camelcase": "^2.1.0",
     "uppercamelcase": "^1.1.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "mocktail": "^0.3.8"
   },
   "scripts": {
     "clean": "rm -rf lib doc coverage",
@@ -62,7 +63,6 @@
     "eslint": "^2.2.0",
     "isparta": "^4.0.0",
     "mocha": "^2.4.5",
-    "mocktail": "^0.3.8",
     "normalize-newline": "^2.0.0"
   }
 }
