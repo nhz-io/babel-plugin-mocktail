@@ -38,7 +38,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Wildhoney/Mocktail#getting-started">Mocktail.mock()</a> your sources
+  <a href="https://github.com/Wildhoney/Mocktail#getting-started">Mocktail.mock()</a> all your exports
 </p>
 
 ## Example
