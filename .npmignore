@@ -1,6 +1,14 @@
 node_modules
+example
 *.log
 src
 test
 coverage
 doc
+gh-pages
+esdoc.json
+.babelrc
+.eslintrc
+.gitattributes
+.gitignore
+.travis.yml
