@@ -12,7 +12,7 @@
   "author": "Ishi Ruy <dev@nhz.io>",
   "license": "MIT",
   "devDependencies": {
-    "babel-plugin-mocktail": "^0.1.5",
+    "babel-plugin-mocktail": "*",
     "mocktail": "^0.3.8",
     "tap-spec": "^4.1.1",
     "tape": "^4.4.0"
