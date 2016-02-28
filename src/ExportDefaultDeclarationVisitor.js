@@ -1,5 +1,5 @@
 import { types as t } from "babel-core"
-import { buildMockExportDefaultDeclaration, buildConst, buildMockExportVar } from "./helpers"
+import { buildMockExportDefaultDeclaration } from "./helpers"
 
 export default class ExportDefaultDeclarationVisitor {
   constructor(defaultState = {}) {
@@ -25,11 +25,6 @@ export default class ExportDefaultDeclarationVisitor {
             enqueue(path, declaration)
             enqueue(path, buildMockExportDefaultDeclaration(mock, name, declaration.id))
             break
-          }
-
-          /** All the rest will throw */
-          default: {
-            throw new TypeError(`Invalid declaration type: ${declaration.type}`)
           }
         }
       }

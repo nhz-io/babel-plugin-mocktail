@@ -34,12 +34,7 @@ export default class ExportNamedDeclarationVisitor {
               }
             })
             break
-          }
-
-          /** All the rest will throw */
-          default: {
-            throw new TypeError(`Invalid declaration type: ${declaration.type}`)
-          }
+          }          
         }
       }
       else if(specifiers) {

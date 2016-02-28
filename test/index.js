@@ -4,7 +4,6 @@ import assert from 'assert'
 import { transformFileSync } from 'babel-core'
 import generate from "babel-generator"
 import normalize from 'normalize-newline'
-import plugin from '../src';
 
 function trim(str) {
   return normalize(str.replace(/^\s+|\s+$/, ''));
@@ -19,9 +18,7 @@ describe('mocktail babel plugin', () => {
       const actualPath = path.join(fixtureDir, 'actual.js');
       const actual = transformFileSync(actualPath, {
         "babelrc": false,
-        "plugins": [
-          ["../src"],
-        ],
+        "plugins": [ "../src" ],
       }).code;
 
       const expected = fs.readFileSync(

@@ -22,12 +22,6 @@ export function buildMockExportDefaultDeclaration(mock, name, expression) {
   ))
 }
 
-export function buildConst(name, declaration) {
-  return t.variableDeclaration("const", [
-    t.variableDeclarator(ensureIdentifier(name), ensureIdentifier(declaration)),
-  ])
-}
-
 export function buildMockExportVar(mock, name, _name, declaration) {
   return t.variableDeclaration("const",
     [

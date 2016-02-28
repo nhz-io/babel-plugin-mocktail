@@ -1,4 +1,4 @@
-import { getModuleName, buildMocktailImport, buildMockExportVar } from "./helpers"
+import { getModuleName, buildMocktailImport } from "./helpers"
 import ExportDefaultDeclarationVisitor from "./ExportDefaultDeclarationVisitor"
 import ExportNamedDeclarationVisitor from "./ExportNamedDeclarationVisitor"
 
