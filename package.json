@@ -40,7 +40,7 @@
     "prebuild": "npm run clean -s",
     "build": "npm run lint && babel src -d lib",
     "test": "mocha --require babel-core/register ./test/*.js",
-    "travis": "npm run-script clean && npm run-script build && npm run-script test && npm run-script coveralls",
+    "travis": "npm run-script clean && npm run-script build && npm run-script test",
     "test:watch": "npm run test -- --watch",
     "prepublish": "npm run build -s",
     "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot ./test/*.js",

@@ -17,3 +17,4 @@ deploy:
     branch: master
 after_deploy:
 - bash ./gh-pages.sh
+- node run-script coveralls
