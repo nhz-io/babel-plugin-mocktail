@@ -1,0 +1,68 @@
+{
+  "name": "babel-plugin-mocktail",
+  "version": "0.1.16",
+  "description": "Mocktail.mock() all your exports",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nhz-io/babel-plugin-mocktail.git"
+  },
+  "author": "Ishi Ruy <dev@nhz.io>",
+  "main": "lib/index.js",
+  "files": [
+    "lib/"
+  ],
+  "dependencies": {
+    "babel-core": "^6.5.2",
+    "camelcase": "^2.1.0",
+    "uppercamelcase": "^1.1.0",
+    "path": "^0.12.7",
+    "mocktail": "^0.3.8"
+  },
+  "scripts": {
+    "clean": "rm -rf lib doc coverage",
+    "lint": "eslint src test",
+    "prebuild": "npm run clean -s",
+    "build": "npm run lint && babel src -d lib",
+    "test": "npm run-script test:plugin && npm run-script test:example",
+    "test:plugin": "mocha --require babel-core/register ./test/*.js",
+    "test:example": "cd example && npm install && npm test",
+    "travis": "npm run-script clean && npm run-script build && npm run-script test:plugin",
+    "test:watch": "npm run test:plugin -- --watch",
+    "prepublish": "npm run build -s",
+    "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot test/*.js",
+    "coveralls": "npm run-script coverage -s && node node_modules/coveralls/bin/coveralls < ./coverage/lcov.info || echo Coverage Failed",
+    "postcoveralls": "rm -rf ./coverage",
+    "postpublish": "git push origin master --follow-tags",
+    "doc": "node ./node_modules/.bin/esdoc -c esdoc.json"
+  },
+  "bugs": {
+    "url": "https://github.com/nhz-io/babel-plugin-mocktail/issues"
+  },
+  "homepage": "https://nhz-io.github.io/babel-plugin-mocktail",
+  "keywords": [
+    "es6",
+    "export",
+    "stub",
+    "stubbing",
+    "babel",
+    "plugin",
+    "mocktail",
+    "babel-plugin",
+    "babel-plugin-mocktail"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.5.1",
+    "babel-eslint": "^5.0.0",
+    "babel-generator": "^6.5.0",
+    "babel-preset-es2015": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "coveralls": "^2.11.8",
+    "esdoc": "^0.4.5",
+    "esdoc-es7-plugin": "0.0.3",
+    "eslint": "^2.2.0",
+    "isparta": "^4.0.0",
+    "mocha": "^2.4.5",
+    "normalize-newline": "^2.0.0"
+  }
+}

@@ -1,0 +1,1225 @@
+[
+  {
+    "__docId__": 0,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/ExportDefaultDeclarationVisitor.js",
+    "memberof": null,
+    "longname": "src/ExportDefaultDeclarationVisitor.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { types as t } from \"babel-core\"\nimport { buildMockExportDefaultDeclaration } from \"./helpers\"\n\nexport default class ExportDefaultDeclarationVisitor {\n  constructor(defaultState = {}) {\n    return function(path, state = defaultState) {\n      const { enqueue, scope, moduleName, mock } = state\n      let { declaration } = path.node\n      if(declaration) {\n        switch(true) {\n\n          /** Declaration */\n          case t.isDeclaration(declaration) || t.isExpression(declaration): {\n            let name = declaration.name || moduleName\n            if (declaration.id && declaration.id.name) {\n              name = declaration.id.name\n            }\n            else if (t.isFunctionDeclaration(declaration) || t.isClassDeclaration(declaration)) {\n              declaration.id = scope.generateUidIdentifier(name)\n            }\n            else {\n              enqueue(path, buildMockExportDefaultDeclaration(mock, name, declaration))\n              break\n            }\n            enqueue(path, declaration)\n            enqueue(path, buildMockExportDefaultDeclaration(mock, name, declaration.id))\n            break\n          }\n        }\n      }\n    }\n  }\n}\n"
+  },
+  {
+    "__docId__": 1,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "ExportDefaultDeclarationVisitor",
+    "memberof": "src/ExportDefaultDeclarationVisitor.js",
+    "longname": "src/ExportDefaultDeclarationVisitor.js~ExportDefaultDeclarationVisitor",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/ExportDefaultDeclarationVisitor.js",
+    "importStyle": "ExportDefaultDeclarationVisitor",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 2,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/ExportDefaultDeclarationVisitor.js~ExportDefaultDeclarationVisitor",
+    "longname": "src/ExportDefaultDeclarationVisitor.js~ExportDefaultDeclarationVisitor#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "defaultState",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 3,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/ExportNamedDeclarationVisitor.js",
+    "memberof": null,
+    "longname": "src/ExportNamedDeclarationVisitor.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { types as t } from \"babel-core\"\nimport { buildExportNamedDeclaration, buildMockExportVar } from \"./helpers\"\n\nexport default class ExportNamedDeclarationVisitor {\n  constructor(defaultState = {}) {\n    return function(path, state = defaultState) {\n      const { enqueue, scope, moduleName, mock } = state\n      const { declaration, specifiers } = path.node\n      if(declaration) {\n        switch(true) {\n          /** Declaration */\n          case t.isDeclaration(declaration): {\n            const declarations = [].concat(declaration || [], declaration.declarations || [])\n            declarations.forEach((declaration) => {\n              switch(true) {\n                case t.isVariableDeclaration(declaration): {\n                  enqueue(path, declaration)\n                  break\n                }\n                case t.isVariableDeclarator(declaration): {\n                  let name = declaration.id.name\n                  let _name = scope.generateUidIdentifier(name)\n                  enqueue(path, buildMockExportVar(mock, name, _name))\n                  enqueue(path, buildExportNamedDeclaration(_name, name))\n                  break\n                }\n                default: {\n                  let name = declaration.name || (declaration.id && declaration.id.name) || moduleName\n                  let _name = scope.generateUidIdentifier(name).name\n                  enqueue(path, declaration)\n                  enqueue(path, buildMockExportVar(mock, name, _name))\n                  enqueue(path, buildExportNamedDeclaration(_name, name))\n                }\n              }\n            })\n            break\n          }          \n        }\n      }\n      else if(specifiers) {\n        /** Specifiers */\n        specifiers.forEach((specifier) => {\n          const { local: { name: local }, exported: { name: exported } } = specifier\n          const _name = scope.generateUidIdentifier(local).name\n          enqueue(path, buildMockExportVar(mock, exported, _name, local))\n          enqueue(path, buildExportNamedDeclaration(_name, exported))\n        })\n      }\n    }\n  }\n}\n"
+  },
+  {
+    "__docId__": 4,
+    "kind": "class",
+    "static": true,
+    "variation": null,
+    "name": "ExportNamedDeclarationVisitor",
+    "memberof": "src/ExportNamedDeclarationVisitor.js",
+    "longname": "src/ExportNamedDeclarationVisitor.js~ExportNamedDeclarationVisitor",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/ExportNamedDeclarationVisitor.js",
+    "importStyle": "ExportNamedDeclarationVisitor",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "interface": false
+  },
+  {
+    "__docId__": 5,
+    "kind": "constructor",
+    "static": false,
+    "variation": null,
+    "name": "constructor",
+    "memberof": "src/ExportNamedDeclarationVisitor.js~ExportNamedDeclarationVisitor",
+    "longname": "src/ExportNamedDeclarationVisitor.js~ExportNamedDeclarationVisitor#constructor",
+    "access": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "defaultState",
+        "optional": true,
+        "types": [
+          "{}"
+        ],
+        "defaultRaw": {},
+        "defaultValue": "{}"
+      }
+    ],
+    "generator": false
+  },
+  {
+    "__docId__": 6,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/helpers.js",
+    "memberof": null,
+    "longname": "src/helpers.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { parse } from \"path\"\nimport lowerCamelCase from \"camelcase\"\nimport upperCamelCase from \"uppercamelcase\"\nimport { types as t } from \"babel-core\"\n\nexport function getModuleName(filename) {\n  const name = parse(filename).name\n  return name[0] === name[0].toUpperCase() ? upperCamelCase(name) : lowerCamelCase(name)\n}\n\nexport function ensureIdentifier(value) {\n  return typeof value === \"string\" ? t.identifier(value) : value\n}\n\nexport function ensureStringLiteral(value) {\n  return typeof value === \"string\" ? t.stringLiteral(value) : value\n}\n\nexport function buildMockExportDefaultDeclaration(mock, name, expression) {\n  return t.exportDefaultDeclaration(t.callExpression(\n    ensureIdentifier(mock), [ ensureIdentifier(expression), ensureStringLiteral(name) ]\n  ))\n}\n\nexport function buildMockExportVar(mock, name, _name, declaration) {\n  return t.variableDeclaration(\"const\",\n    [\n      t.variableDeclarator(\n        ensureIdentifier(_name),\n        t.callExpression(\n          ensureIdentifier(mock),\n          [ ensureIdentifier(declaration || name), ensureStringLiteral(name) ]\n        )\n      ),\n    ]\n  )\n}\n\nexport function buildExportNamedDeclaration(local, exported) {\n  return t.exportNamedDeclaration(\n    null,\n    [\n      t.exportSpecifier(ensureIdentifier(local), ensureIdentifier(exported)),\n    ],\n    null\n  )\n}\n\nexport function buildMocktailImport(mock) {\n  return t.importDeclaration(\n    [ t.importSpecifier(mock, ensureIdentifier(\"mock\")) ],\n    ensureStringLiteral(\"mocktail\")\n  )\n}\n"
+  },
+  {
+    "__docId__": 7,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "getModuleName",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~getModuleName",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{getModuleName}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "params": [
+      {
+        "name": "filename",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 8,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "ensureIdentifier",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~ensureIdentifier",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{ensureIdentifier}",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 9,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "ensureStringLiteral",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~ensureStringLiteral",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{ensureStringLiteral}",
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "params": [
+      {
+        "name": "value",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 10,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "buildMockExportDefaultDeclaration",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~buildMockExportDefaultDeclaration",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{buildMockExportDefaultDeclaration}",
+    "description": null,
+    "lineNumber": 19,
+    "undocument": true,
+    "params": [
+      {
+        "name": "mock",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "expression",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 11,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "buildMockExportVar",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~buildMockExportVar",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{buildMockExportVar}",
+    "description": null,
+    "lineNumber": 25,
+    "undocument": true,
+    "params": [
+      {
+        "name": "mock",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "_name",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "declaration",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 12,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "buildExportNamedDeclaration",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~buildExportNamedDeclaration",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{buildExportNamedDeclaration}",
+    "description": null,
+    "lineNumber": 39,
+    "undocument": true,
+    "params": [
+      {
+        "name": "local",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "exported",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 13,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "buildMocktailImport",
+    "memberof": "src/helpers.js",
+    "longname": "src/helpers.js~buildMocktailImport",
+    "access": null,
+    "export": true,
+    "importPath": "babel-plugin-mocktail/src/helpers.js",
+    "importStyle": "{buildMocktailImport}",
+    "description": null,
+    "lineNumber": 49,
+    "undocument": true,
+    "params": [
+      {
+        "name": "mock",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 14,
+    "kind": "file",
+    "static": true,
+    "variation": null,
+    "name": "src/index.js",
+    "memberof": null,
+    "longname": "src/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { getModuleName, buildMocktailImport } from \"./helpers\"\nimport ExportDefaultDeclarationVisitor from \"./ExportDefaultDeclarationVisitor\"\nimport ExportNamedDeclarationVisitor from \"./ExportNamedDeclarationVisitor\"\n\nmodule.exports = function( { types: t }) {\n  const visitor = {\n    Program: function(path, {file:{opts:{ filename }} }) {\n      const { scope } = path\n      const moduleName = getModuleName(filename)\n      const mock = scope.generateUidIdentifier(\"mock\")\n\n      const queue = new Map()\n      function enqueue(path, replacement) {\n        const list = queue.get(path) || []\n        list.push(replacement)\n        queue.set(path, list.slice())\n        return list\n      }\n\n      path.traverse({\n        /** ExportDefaultDeclaration Visitor */\n        ExportDefaultDeclaration: new ExportDefaultDeclarationVisitor({enqueue, mock, moduleName, scope}),\n\n        /** ExportNamedDeclaration Visitor */\n        ExportNamedDeclaration: new ExportNamedDeclarationVisitor({enqueue, mock, moduleName, scope}),\n      })\n\n      if(queue.size) {\n        path.get('body')[0].insertBefore(buildMocktailImport(mock))\n        queue.forEach((nodes, path) => path.replaceWithMultiple(nodes))\n      }\n    },\n  }\n\n  return { visitor }\n}\n"
+  },
+  {
+    "__docId__": 15,
+    "kind": "function",
+    "static": true,
+    "variation": null,
+    "name": "exports",
+    "memberof": "src/index.js",
+    "longname": "src/index.js~exports",
+    "access": null,
+    "export": false,
+    "importPath": "babel-plugin-mocktail/src/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "params": [
+      {
+        "name": "objectPattern",
+        "types": [
+          "{\"types\": *}"
+        ],
+        "defaultRaw": {
+          "types": null
+        },
+        "defaultValue": "{\"types\":null}"
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "generator": false
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Infinity",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~NaN",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~undefined",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~null",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~object",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~function",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~boolean",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Symbol",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Error",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~EvalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~InternalError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RangeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ReferenceError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~SyntaxError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~TypeError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~URIError",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~number",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Date",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~String",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~string",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~RegExp",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint8ClampedArray",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint16Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Int32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 49,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Uint32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 50,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float32Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 51,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Float64Array",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Map",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Set",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 54,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakMap",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 55,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~WeakSet",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 56,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~ArrayBuffer",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~DataView",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 58,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~JSON",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Promise",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Generator",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 61,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~GeneratorFunction",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 62,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Reflect",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 63,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "BuiltinExternal/ECMAScriptExternal.js",
+    "longname": "BuiltinExternal/ECMAScriptExternal.js~Proxy",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "CanvasRenderingContext2D",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~CanvasRenderingContext2D",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "DocumentFragment",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~DocumentFragment",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Element",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Element",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Element",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Event",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Event",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Event",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "Node",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/Node",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~Node",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "NodeList",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/API/NodeList",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~NodeList",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "XMLHttpRequest",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/XMLHttpRequest",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~XMLHttpRequest",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "external",
+    "static": true,
+    "variation": null,
+    "name": "AudioContext",
+    "externalLink": "https://developer.mozilla.org/en/docs/Web/API/AudioContext",
+    "memberof": "BuiltinExternal/WebAPIExternal.js",
+    "longname": "BuiltinExternal/WebAPIExternal.js~AudioContext",
+    "access": null,
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/fixtures/default-export/actual.js",
+    "memberof": null,
+    "longname": "test/fixtures/default-export/actual.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "const foobar = null\nexport default foobar\nexport default {}\nexport default class {}\nexport default function() {}\nexport default function foo() {}\nexport default class Foo {}\n"
+  },
+  {
+    "__docId__": 74,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/fixtures/default-export/expected.js",
+    "memberof": null,
+    "longname": "test/fixtures/default-export/expected.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { mock as _mock } from \"mocktail\";\nconst foobar = null;\nexport default _mock(foobar, \"foobar\");\nexport default _mock({}, \"actual\");\nclass _actual {}\nexport default _mock(_actual, \"actual\");\nfunction _actual2() {}\nexport default _mock(_actual2, \"actual\");\nfunction foo() {}\nexport default _mock(foo, \"foo\");\nclass Foo {}\nexport default _mock(Foo, \"Foo\");\n"
+  },
+  {
+    "__docId__": 75,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/fixtures/named-export/actual.js",
+    "memberof": null,
+    "longname": "test/fixtures/named-export/actual.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "export const Foo = null\nexport class Bar {}\nexport function foo() {}\nexport { Foo as Foobar }\nexport { foobar }\n"
+  },
+  {
+    "__docId__": 76,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/fixtures/named-export/expected.js",
+    "memberof": null,
+    "longname": "test/fixtures/named-export/expected.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import { mock as _mock } from \"mocktail\";\nconst Foo = null;\n\nconst _Foo = _mock(Foo, \"Foo\");\n\nexport { _Foo as Foo };\nclass Bar {}\n\nconst _Bar = _mock(Bar, \"Bar\");\n\nexport { _Bar as Bar };\nfunction foo() {}\n\nconst _foo = _mock(foo, \"foo\");\n\nexport { _foo as foo };\n\nconst _Foo2 = _mock(Foo, \"Foobar\");\n\nexport { _Foo2 as Foobar };\n\nconst _foobar = _mock(foobar, \"foobar\");\n\nexport { _foobar as foobar };\n"
+  },
+  {
+    "__docId__": 77,
+    "kind": "testFile",
+    "static": true,
+    "variation": null,
+    "name": "test/index.js",
+    "memberof": null,
+    "longname": "test/index.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 1,
+    "content": "import path from 'path'\nimport fs from 'fs'\nimport assert from 'assert'\nimport { transformFileSync } from 'babel-core'\nimport generate from \"babel-generator\"\nimport normalize from 'normalize-newline'\n\nfunction trim(str) {\n  return normalize(str.replace(/^\\s+|\\s+$/, ''));\n}\n\ndescribe('mocktail babel plugin', () => {\n  const fixturesDir = path.resolve(__dirname, './fixtures');\n\n  fs.readdirSync(fixturesDir).map((caseName) => {\n    it(`should mock ${caseName.split('-').join(' ')}`, () => {\n      const fixtureDir = path.join(fixturesDir, caseName);\n      const actualPath = path.join(fixtureDir, 'actual.js');\n      const actual = transformFileSync(actualPath, {\n        \"babelrc\": false,\n        \"plugins\": [ \"../src\" ],\n      }).code;\n\n      const expected = fs.readFileSync(\n          path.join(fixtureDir, 'expected.js')\n      ).toString();\n\n      assert.equal(trim(actual), trim(expected));\n    });\n  });\n\n});\n"
+  },
+  {
+    "__docId__": 78,
+    "kind": "testDescribe",
+    "static": true,
+    "variation": null,
+    "name": "describe0",
+    "testId": 0,
+    "memberof": "test/index.js",
+    "testDepth": 0,
+    "longname": "test/index.js~describe0",
+    "access": null,
+    "description": "mocktail babel plugin",
+    "lineNumber": 12
+  },
+  {
+    "__docId__": 79,
+    "kind": "testIt",
+    "static": true,
+    "variation": null,
+    "name": "it1",
+    "testId": 1,
+    "memberof": "test/index.js~describe0",
+    "testDepth": 1,
+    "longname": "test/index.js~describe0.it1",
+    "access": null,
+    "lineNumber": 16
+  }
+]

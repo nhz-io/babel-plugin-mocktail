@@ -1,0 +1,1177 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 404,
+  "loc": {
+    "start": {
+      "line": 1,
+      "column": 0
+    },
+    "end": {
+      "line": 25,
+      "column": 0
+    }
+  },
+  "sourceType": "module",
+  "body": [
+    {
+      "type": "ImportDeclaration",
+      "start": 0,
+      "end": 41,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 1,
+          "column": 41
+        }
+      },
+      "specifiers": [
+        {
+          "type": "ImportSpecifier",
+          "start": 9,
+          "end": 22,
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 9
+            },
+            "end": {
+              "line": 1,
+              "column": 22
+            }
+          },
+          "imported": {
+            "type": "Identifier",
+            "start": 9,
+            "end": 13,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 9
+              },
+              "end": {
+                "line": 1,
+                "column": 13
+              }
+            },
+            "name": "mock"
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 17,
+            "end": 22,
+            "loc": {
+              "start": {
+                "line": 1,
+                "column": 17
+              },
+              "end": {
+                "line": 1,
+                "column": 22
+              }
+            },
+            "name": "_mock"
+          }
+        }
+      ],
+      "importKind": "value",
+      "source": {
+        "type": "Literal",
+        "start": 30,
+        "end": 40,
+        "loc": {
+          "start": {
+            "line": 1,
+            "column": 30
+          },
+          "end": {
+            "line": 1,
+            "column": 40
+          }
+        },
+        "value": "mocktail",
+        "rawValue": "mocktail",
+        "raw": "\"mocktail\""
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 42,
+      "end": 59,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 0
+        },
+        "end": {
+          "line": 2,
+          "column": 17
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 48,
+          "end": 58,
+          "loc": {
+            "start": {
+              "line": 2,
+              "column": 6
+            },
+            "end": {
+              "line": 2,
+              "column": 16
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 48,
+            "end": 51,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 6
+              },
+              "end": {
+                "line": 2,
+                "column": 9
+              }
+            },
+            "name": "Foo"
+          },
+          "init": {
+            "type": "Literal",
+            "start": 54,
+            "end": 58,
+            "loc": {
+              "start": {
+                "line": 2,
+                "column": 12
+              },
+              "end": {
+                "line": 2,
+                "column": 16
+              }
+            },
+            "value": null,
+            "rawValue": null,
+            "raw": "null"
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 61,
+      "end": 92,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 0
+        },
+        "end": {
+          "line": 4,
+          "column": 31
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 67,
+          "end": 91,
+          "loc": {
+            "start": {
+              "line": 4,
+              "column": 6
+            },
+            "end": {
+              "line": 4,
+              "column": 30
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 67,
+            "end": 71,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 6
+              },
+              "end": {
+                "line": 4,
+                "column": 10
+              }
+            },
+            "name": "_Foo"
+          },
+          "init": {
+            "type": "CallExpression",
+            "start": 74,
+            "end": 91,
+            "loc": {
+              "start": {
+                "line": 4,
+                "column": 13
+              },
+              "end": {
+                "line": 4,
+                "column": 30
+              }
+            },
+            "callee": {
+              "type": "Identifier",
+              "start": 74,
+              "end": 79,
+              "loc": {
+                "start": {
+                  "line": 4,
+                  "column": 13
+                },
+                "end": {
+                  "line": 4,
+                  "column": 18
+                }
+              },
+              "name": "_mock"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "start": 80,
+                "end": 83,
+                "loc": {
+                  "start": {
+                    "line": 4,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 4,
+                    "column": 22
+                  }
+                },
+                "name": "Foo"
+              },
+              {
+                "type": "Literal",
+                "start": 85,
+                "end": 90,
+                "loc": {
+                  "start": {
+                    "line": 4,
+                    "column": 24
+                  },
+                  "end": {
+                    "line": 4,
+                    "column": 29
+                  }
+                },
+                "value": "Foo",
+                "rawValue": "Foo",
+                "raw": "\"Foo\""
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 94,
+      "end": 117,
+      "loc": {
+        "start": {
+          "line": 6,
+          "column": 0
+        },
+        "end": {
+          "line": 6,
+          "column": 23
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 103,
+          "end": 114,
+          "loc": {
+            "start": {
+              "line": 6,
+              "column": 9
+            },
+            "end": {
+              "line": 6,
+              "column": 20
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 103,
+            "end": 107,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 9
+              },
+              "end": {
+                "line": 6,
+                "column": 13
+              }
+            },
+            "name": "_Foo"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 111,
+            "end": 114,
+            "loc": {
+              "start": {
+                "line": 6,
+                "column": 17
+              },
+              "end": {
+                "line": 6,
+                "column": 20
+              }
+            },
+            "name": "Foo"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "ClassDeclaration",
+      "start": 118,
+      "end": 130,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 12
+        }
+      },
+      "id": {
+        "type": "Identifier",
+        "start": 124,
+        "end": 127,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 6
+          },
+          "end": {
+            "line": 7,
+            "column": 9
+          }
+        },
+        "name": "Bar"
+      },
+      "superClass": null,
+      "body": {
+        "type": "ClassBody",
+        "start": 128,
+        "end": 130,
+        "loc": {
+          "start": {
+            "line": 7,
+            "column": 10
+          },
+          "end": {
+            "line": 7,
+            "column": 12
+          }
+        },
+        "body": []
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 132,
+      "end": 163,
+      "loc": {
+        "start": {
+          "line": 9,
+          "column": 0
+        },
+        "end": {
+          "line": 9,
+          "column": 31
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 138,
+          "end": 162,
+          "loc": {
+            "start": {
+              "line": 9,
+              "column": 6
+            },
+            "end": {
+              "line": 9,
+              "column": 30
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 138,
+            "end": 142,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 6
+              },
+              "end": {
+                "line": 9,
+                "column": 10
+              }
+            },
+            "name": "_Bar"
+          },
+          "init": {
+            "type": "CallExpression",
+            "start": 145,
+            "end": 162,
+            "loc": {
+              "start": {
+                "line": 9,
+                "column": 13
+              },
+              "end": {
+                "line": 9,
+                "column": 30
+              }
+            },
+            "callee": {
+              "type": "Identifier",
+              "start": 145,
+              "end": 150,
+              "loc": {
+                "start": {
+                  "line": 9,
+                  "column": 13
+                },
+                "end": {
+                  "line": 9,
+                  "column": 18
+                }
+              },
+              "name": "_mock"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "start": 151,
+                "end": 154,
+                "loc": {
+                  "start": {
+                    "line": 9,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 22
+                  }
+                },
+                "name": "Bar"
+              },
+              {
+                "type": "Literal",
+                "start": 156,
+                "end": 161,
+                "loc": {
+                  "start": {
+                    "line": 9,
+                    "column": 24
+                  },
+                  "end": {
+                    "line": 9,
+                    "column": 29
+                  }
+                },
+                "value": "Bar",
+                "rawValue": "Bar",
+                "raw": "\"Bar\""
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 165,
+      "end": 188,
+      "loc": {
+        "start": {
+          "line": 11,
+          "column": 0
+        },
+        "end": {
+          "line": 11,
+          "column": 23
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 174,
+          "end": 185,
+          "loc": {
+            "start": {
+              "line": 11,
+              "column": 9
+            },
+            "end": {
+              "line": 11,
+              "column": 20
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 174,
+            "end": 178,
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 9
+              },
+              "end": {
+                "line": 11,
+                "column": 13
+              }
+            },
+            "name": "_Bar"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 182,
+            "end": 185,
+            "loc": {
+              "start": {
+                "line": 11,
+                "column": 17
+              },
+              "end": {
+                "line": 11,
+                "column": 20
+              }
+            },
+            "name": "Bar"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "FunctionDeclaration",
+      "start": 189,
+      "end": 206,
+      "loc": {
+        "start": {
+          "line": 12,
+          "column": 0
+        },
+        "end": {
+          "line": 12,
+          "column": 17
+        }
+      },
+      "id": {
+        "type": "Identifier",
+        "start": 198,
+        "end": 201,
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 9
+          },
+          "end": {
+            "line": 12,
+            "column": 12
+          }
+        },
+        "name": "foo"
+      },
+      "generator": false,
+      "expression": false,
+      "async": false,
+      "params": [],
+      "body": {
+        "type": "BlockStatement",
+        "start": 204,
+        "end": 206,
+        "loc": {
+          "start": {
+            "line": 12,
+            "column": 15
+          },
+          "end": {
+            "line": 12,
+            "column": 17
+          }
+        },
+        "body": []
+      }
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 208,
+      "end": 239,
+      "loc": {
+        "start": {
+          "line": 14,
+          "column": 0
+        },
+        "end": {
+          "line": 14,
+          "column": 31
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 214,
+          "end": 238,
+          "loc": {
+            "start": {
+              "line": 14,
+              "column": 6
+            },
+            "end": {
+              "line": 14,
+              "column": 30
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 214,
+            "end": 218,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 6
+              },
+              "end": {
+                "line": 14,
+                "column": 10
+              }
+            },
+            "name": "_foo"
+          },
+          "init": {
+            "type": "CallExpression",
+            "start": 221,
+            "end": 238,
+            "loc": {
+              "start": {
+                "line": 14,
+                "column": 13
+              },
+              "end": {
+                "line": 14,
+                "column": 30
+              }
+            },
+            "callee": {
+              "type": "Identifier",
+              "start": 221,
+              "end": 226,
+              "loc": {
+                "start": {
+                  "line": 14,
+                  "column": 13
+                },
+                "end": {
+                  "line": 14,
+                  "column": 18
+                }
+              },
+              "name": "_mock"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "start": 227,
+                "end": 230,
+                "loc": {
+                  "start": {
+                    "line": 14,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 14,
+                    "column": 22
+                  }
+                },
+                "name": "foo"
+              },
+              {
+                "type": "Literal",
+                "start": 232,
+                "end": 237,
+                "loc": {
+                  "start": {
+                    "line": 14,
+                    "column": 24
+                  },
+                  "end": {
+                    "line": 14,
+                    "column": 29
+                  }
+                },
+                "value": "foo",
+                "rawValue": "foo",
+                "raw": "\"foo\""
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 241,
+      "end": 264,
+      "loc": {
+        "start": {
+          "line": 16,
+          "column": 0
+        },
+        "end": {
+          "line": 16,
+          "column": 23
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 250,
+          "end": 261,
+          "loc": {
+            "start": {
+              "line": 16,
+              "column": 9
+            },
+            "end": {
+              "line": 16,
+              "column": 20
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 250,
+            "end": 254,
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 9
+              },
+              "end": {
+                "line": 16,
+                "column": 13
+              }
+            },
+            "name": "_foo"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 258,
+            "end": 261,
+            "loc": {
+              "start": {
+                "line": 16,
+                "column": 17
+              },
+              "end": {
+                "line": 16,
+                "column": 20
+              }
+            },
+            "name": "foo"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 266,
+      "end": 301,
+      "loc": {
+        "start": {
+          "line": 18,
+          "column": 0
+        },
+        "end": {
+          "line": 18,
+          "column": 35
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 272,
+          "end": 300,
+          "loc": {
+            "start": {
+              "line": 18,
+              "column": 6
+            },
+            "end": {
+              "line": 18,
+              "column": 34
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 272,
+            "end": 277,
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 6
+              },
+              "end": {
+                "line": 18,
+                "column": 11
+              }
+            },
+            "name": "_Foo2"
+          },
+          "init": {
+            "type": "CallExpression",
+            "start": 280,
+            "end": 300,
+            "loc": {
+              "start": {
+                "line": 18,
+                "column": 14
+              },
+              "end": {
+                "line": 18,
+                "column": 34
+              }
+            },
+            "callee": {
+              "type": "Identifier",
+              "start": 280,
+              "end": 285,
+              "loc": {
+                "start": {
+                  "line": 18,
+                  "column": 14
+                },
+                "end": {
+                  "line": 18,
+                  "column": 19
+                }
+              },
+              "name": "_mock"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "start": 286,
+                "end": 289,
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 23
+                  }
+                },
+                "name": "Foo"
+              },
+              {
+                "type": "Literal",
+                "start": 291,
+                "end": 299,
+                "loc": {
+                  "start": {
+                    "line": 18,
+                    "column": 25
+                  },
+                  "end": {
+                    "line": 18,
+                    "column": 33
+                  }
+                },
+                "value": "Foobar",
+                "rawValue": "Foobar",
+                "raw": "\"Foobar\""
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 303,
+      "end": 330,
+      "loc": {
+        "start": {
+          "line": 20,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 27
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 312,
+          "end": 327,
+          "loc": {
+            "start": {
+              "line": 20,
+              "column": 9
+            },
+            "end": {
+              "line": 20,
+              "column": 24
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 312,
+            "end": 317,
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 9
+              },
+              "end": {
+                "line": 20,
+                "column": 14
+              }
+            },
+            "name": "_Foo2"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 321,
+            "end": 327,
+            "loc": {
+              "start": {
+                "line": 20,
+                "column": 18
+              },
+              "end": {
+                "line": 20,
+                "column": 24
+              }
+            },
+            "name": "Foobar"
+          }
+        }
+      ],
+      "source": null
+    },
+    {
+      "type": "VariableDeclaration",
+      "start": 332,
+      "end": 372,
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 40
+        }
+      },
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "start": 338,
+          "end": 371,
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 6
+            },
+            "end": {
+              "line": 22,
+              "column": 39
+            }
+          },
+          "id": {
+            "type": "Identifier",
+            "start": 338,
+            "end": 345,
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 6
+              },
+              "end": {
+                "line": 22,
+                "column": 13
+              }
+            },
+            "name": "_foobar"
+          },
+          "init": {
+            "type": "CallExpression",
+            "start": 348,
+            "end": 371,
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 16
+              },
+              "end": {
+                "line": 22,
+                "column": 39
+              }
+            },
+            "callee": {
+              "type": "Identifier",
+              "start": 348,
+              "end": 353,
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 16
+                },
+                "end": {
+                  "line": 22,
+                  "column": 21
+                }
+              },
+              "name": "_mock"
+            },
+            "arguments": [
+              {
+                "type": "Identifier",
+                "start": 354,
+                "end": 360,
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 22
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 28
+                  }
+                },
+                "name": "foobar"
+              },
+              {
+                "type": "Literal",
+                "start": 362,
+                "end": 370,
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 30
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 38
+                  }
+                },
+                "value": "foobar",
+                "rawValue": "foobar",
+                "raw": "\"foobar\""
+              }
+            ]
+          }
+        }
+      ],
+      "kind": "const"
+    },
+    {
+      "type": "ExportNamedDeclaration",
+      "start": 374,
+      "end": 403,
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 24,
+          "column": 29
+        }
+      },
+      "declaration": null,
+      "specifiers": [
+        {
+          "type": "ExportSpecifier",
+          "start": 383,
+          "end": 400,
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 9
+            },
+            "end": {
+              "line": 24,
+              "column": 26
+            }
+          },
+          "local": {
+            "type": "Identifier",
+            "start": 383,
+            "end": 390,
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 9
+              },
+              "end": {
+                "line": 24,
+                "column": 16
+              }
+            },
+            "name": "_foobar"
+          },
+          "exported": {
+            "type": "Identifier",
+            "start": 394,
+            "end": 400,
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 20
+              },
+              "end": {
+                "line": 24,
+                "column": 26
+              }
+            },
+            "name": "foobar"
+          }
+        }
+      ],
+      "source": null
+    }
+  ]
+}

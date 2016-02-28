@@ -1,0 +1,36 @@
+{
+  "coverage": "0%",
+  "expectCount": 11,
+  "actualCount": 0,
+  "files": {
+    "src/ExportDefaultDeclarationVisitor.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5
+      ]
+    },
+    "src/ExportNamedDeclarationVisitor.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        4,
+        5
+      ]
+    },
+    "src/helpers.js": {
+      "expectCount": 7,
+      "actualCount": 0,
+      "undocumentLines": [
+        39,
+        19,
+        25,
+        49,
+        11,
+        15,
+        6
+      ]
+    }
+  }
+}

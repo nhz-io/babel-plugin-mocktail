@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl">
+  <title data-ice="title">API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="https://github.com/nhz-io/babel-plugin-mocktail.git" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ExportDefaultDeclarationVisitor.js~ExportDefaultDeclarationVisitor.html">ExportDefaultDeclarationVisitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/ExportNamedDeclarationVisitor.js~ExportNamedDeclarationVisitor.html">ExportNamedDeclarationVisitor</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-buildExportNamedDeclaration">buildExportNamedDeclaration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-buildMockExportDefaultDeclaration">buildMockExportDefaultDeclaration</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-buildMockExportVar">buildMockExportVar</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-buildMocktailImport">buildMocktailImport</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ensureIdentifier">ensureIdentifier</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-ensureStringLiteral">ensureStringLiteral</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getModuleName">getModuleName</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div data-ice="index" class="github-markdown"><p></p><h1>babel-plugin-mocktail</h1>
+
+<p></p>
+<p></p><p>
+  <a href="https://npmjs.org/package/babel-plugin-mocktail">
+    <img src="https://img.shields.io/npm/v/babel-plugin-mocktail.svg?style=flat">
+  </a>
+
+  <a href="https://coveralls.io/r/nhz-io/babel-plugin-mocktail">
+    <img src="https://img.shields.io/coveralls/nhz-io/babel-plugin-mocktail.svg?style=flat">
+  </a>
+
+  <a href="https://www.bithound.io/github/nhz-io/babel-plugin-mocktail">
+    <img src="https://www.bithound.io/github/nhz-io/babel-plugin-mocktail/badges/score.svg">
+  </a>
+
+  <a href="https://travis-ci.org/nhz-io/babel-plugin-mocktail">
+    <img src="https://img.shields.io/travis/nhz-io/babel-plugin-mocktail.svg?style=flat">
+  </a>
+
+  <a href="https://npmjs.org/package/babel-plugin-mocktail">
+    <img src="http://img.shields.io/npm/dm/babel-plugin-mocktail.svg?style=flat">
+  </a>
+
+  <a href="https://david-dm.org/nhz-io/babel-plugin-mocktail.svg">
+    <img src="https://david-dm.org/nhz-io/babel-plugin-mocktail.svg?style=flat">
+  </a>
+
+  <a href="https://github.com/nhz-io/babel-plugin-mocktail/blob/master/LICENSE">
+    <img src="https://img.shields.io/npm/l/babel-plugin-mocktail.svg?style=flat">
+  </a>
+</p>
+
+<p></p>
+<p></p><p>
+  <a href="https://github.com/Wildhoney/Mocktail#getting-started">Mocktail.mock()</a> all your exports
+</p>
+
+<p></p>
+<h2 id="usage-mocha-">Usage (Mocha)</h2>
+<h3 id="setup">Setup</h3>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install --save-dev babel-cli babel-plugin-mocktail mocha assert</code>
+</code></pre>
+<h3 id="create-example-source-for-testing">Create example <code>source</code> for testing</h3>
+<p><code>File: src/example.js</code></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">const Example = &quot;unmocked&quot;
+export default Example</code>
+</code></pre>
+<h3 id="create-env-testing-trigger">Create <code>ENV.TESTING</code> trigger</h3>
+<p><code>File: test/setup.js</code></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { env, ENV } from &quot;mocktail&quot;
+env(ENV.TESTING)</code>
+</code></pre>
+<h3 id="create-mock-file-">Create <code>mock file</code></h3>
+<p><code>File: test/example.mock.js</code></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import { inject } from &quot;mocktail&quot;
+inject(&quot;Example&quot;, &quot;mocked&quot;)</code>
+</code></pre>
+<h3 id="create-test-unmocked-">Create <code>test</code> (unmocked)</h3>
+<p><code>File: test/unmocked.test.js</code></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import assert from &quot;assert&quot;
+import Example from &quot;../src/example&quot;
+
+describe(&quot;Unmocked Example&quot;, () =&gt; {
+  it(&quot;should be unmocked&quot;, () =&gt; assert(Example === &quot;unmocked&quot;))
+})</code>
+</code></pre>
+<h3 id="create-unit-test-mocked-">Create <code>unit test</code> (mocked)</h3>
+<p><code>File: test/mocked.test.js</code></p>
+<pre><code class="lang-js"><code class="source-code prettyprint">import &quot;./setup&quot;
+import &quot;./example.mock&quot;
+import assert from &quot;assert&quot;
+import Example from &quot;../src/example&quot;
+
+describe(&quot;Mocked Example&quot;, () =&gt; {
+  it(&quot;should be mocked&quot;, () =&gt; assert(Example === &quot;mocked&quot;))
+})</code>
+</code></pre>
+<h3 id="run-the-tests">Run the tests</h3>
+<pre><code class="lang-sh"><code class="source-code prettyprint">babel-node --plugins mocktail $(which _mocha) test/unmocked.test.js
+babel-node --plugins mocktail $(which _mocha) test/mocked.test.js</code>
+</code></pre>
+<h3 id="run-the-tests-incorrectly">Run the tests INCORRECTLY</h3>
+<pre><code class="lang-sh"><code class="source-code prettyprint">babel-node --plugins mocktail $(which _mocha) test/*.test.js</code>
+</code></pre>
+<h3 id="notes">Notes</h3>
+<ul>
+<li><a href="example">Example Repository</a></li>
+<li>Avoid using the plugin outside the test context</li>
+<li>Run <code>mocked</code> and <code>unmocked</code> tests in separate runs</li>
+<li>Name your <code>default</code> <code>export</code>s to reduce DI collision chance</li>
+<li><code>env(ENV.TESTING)</code> should be in separate file (<code>setup</code>)</li>
+<li><code>setup</code> should be imported before any other <code>import</code></li>
+<li>mocks should be in separate <code>mock file</code>s</li>
+<li><code>mock file</code>s should be imported before tested <code>source</code>s <code>import</code>s</li>
+</ul>
+<h2 id="how-it-works">How it works</h2>
+<p>The plugin walks the <code>AST</code> and looks for export declarations.<br>When it finds the declaraions, they are replaced with <code>mock(declaration, name)</code>.<br>The <code>name</code> is either the <code>name</code> of the <code>declaration</code> or camel-cased <code>filename</code>.  </p>
+<h2 id="installation">Installation</h2>
+<pre><code class="lang-sh"><code class="source-code prettyprint">npm install --save-dev babel-plugin-mocktail</code>
+</code></pre>
+<h2 id="documentation-esdoc-">Documentation (ESDOC)</h2>
+<p><a href="https://nhz-io.github.io/babel-plugin-mocktail">https://nhz-io.github.io/babel-plugin-mocktail</a></p>
+<h2 id="license">LICENSE</h2>
+<p><a href="LICENSE">MIT</a></p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.4.5)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
