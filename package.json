@@ -25,7 +25,7 @@
     "test": "npm run-script test:plugin && npm run-script test:example",
     "test:plugin": "mocha --require babel-core/register ./test/*.js",
     "test:example": "cd example && npm install && npm test",
-    "travis": "npm run-script clean && npm run-script build && npm run-script test",
+    "travis": "npm run-script clean && npm run-script build && npm run-script test:plugin",
     "test:watch": "npm run test:plugin -- --watch",
     "prepublish": "npm run build -s",
     "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot test/*.js",
