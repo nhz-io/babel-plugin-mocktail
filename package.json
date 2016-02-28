@@ -40,11 +40,11 @@
     "prebuild": "npm run clean -s",
     "build": "npm run lint && babel src -d lib",
     "test": "mocha --require babel-core/register ./test/*.js",
-    "travis": "npm run-script clean && npm run-script build && npm run-script coveralls",
+    "travis": "npm run-script clean && npm run-script build && npm run-script test && npm run-script coveralls",
     "test:watch": "npm run test -- --watch",
     "prepublish": "npm run build -s",
     "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot ./test/*.js",
-    "coveralls": "npm run-script coverage -s && node node_modules/coveralls/bin/coveralls < ./coverage/lcov.info",
+    "coveralls": "npm run-script coverage -s && node node_modules/coveralls/bin/coveralls < ./coverage/lcov.info || echo Coverage Failed",
     "postcoveralls": "rm -rf ./coverage",
     "postpublish": "git push origin master --follow-tags",
     "doc": "node ./node_modules/.bin/esdoc -c esdoc.json"
