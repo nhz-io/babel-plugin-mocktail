@@ -56,7 +56,7 @@
     }
   },
   "bugs": {
-    "url": "https://github.com/nhz-io/sass2styl/issues"
+    "url": "https://github.com/nhz-io/babel-plugin-mocktail/issues"
   },
   "homepage": "https://nhz-io.github.io/babel-plugin-mocktail",
   "keywords": [
