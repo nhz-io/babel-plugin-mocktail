@@ -110,6 +110,7 @@ babel-node --plugins mocktail $(which _mocha) test/*.test.js
 ```
 
 ### Notes
+* [Example Repository](example)
 * Avoid using the plugin outside the test context
 * Run `mocked` and `unmocked` tests in separate runs
 * Name your `default` `export`s to reduce DI collision chance
