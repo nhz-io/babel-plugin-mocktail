@@ -1,9 +1,9 @@
 import "./setup"
-import main from "../src/main"
-import test from "tape"
+import "./example.mock"
 
-test("babel-plugin-mocktail mocked example", (t) => {
-  t.plan(2)
-  t.equal(true, main.mocked, "is `mocked`")
-  t.equal(false, main.original, "is `not original`")
+import assert from "assert"
+import Example from "../src/example"
+
+describe("Mocked Example", () => {
+  it("should be mocked", () => assert(Example === "mocked"))
 })
