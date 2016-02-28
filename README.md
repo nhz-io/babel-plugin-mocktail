@@ -1,4 +1,4 @@
-<h1 align="center">=WIP= babel-plugin-mocktail =WIP=</h1>
+<h1 align="center">babel-plugin-mocktail</h1>
 
 <p align="center">
   <a href="https://npmjs.org/package/babel-plugin-mocktail">
@@ -45,6 +45,7 @@
 
 **In**
 
+`file-a.js`
 ```js
 export default {}
 ```
@@ -53,7 +54,7 @@ export default {}
 
 ```js
 import { mock as _mock } from "mocktail";
-export default _mock({});
+export default _mock({}, "fileA");
 ```
 
 ## Installation
