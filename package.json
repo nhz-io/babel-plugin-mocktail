@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-mocktail",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Mocktail.mock() your sources",
   "repository": {
     "type": "git",
