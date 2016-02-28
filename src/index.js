@@ -1,70 +1,36 @@
-module.exports = function(babel) {
-  let t = babel.types;
-  const ProgramVisitor = {
-    Program: function(path) {
-      let declaration, specifiers, mockedExportIdentifier;
-      let body = path.get('body');
-      if(body[0]) {
+import { getModuleName, buildMocktailImport, buildMockExportVar } from "./helpers"
+import ExportDefaultDeclarationVisitor from "./ExportDefaultDeclarationVisitor"
+import ExportNamedDeclarationVisitor from "./ExportNamedDeclarationVisitor"
 
-        let mocktail = t.stringLiteral("mocktail");
-        let mockLocalIdentifier = path.scope.generateUidIdentifier("mock");
-        let mockImportSpecifier = t.importSpecifier(mockLocalIdentifier, t.identifier("mock"));
-        body[0].insertBefore(t.importDeclaration([mockImportSpecifier], mocktail));
+module.exports = function( { types: t }) {
+  const visitor = {
+    Program: function(path, {file:{opts:{ filename }} }) {
+      const { scope } = path
+      const moduleName = getModuleName(filename)
+      const mock = scope.generateUidIdentifier("mock")
 
-        body.forEach(function(childPath) {
-          switch(true) {
-            case childPath.isExportDefaultDeclaration():
-              declaration = childPath.node.declaration
-              childPath.node.declaration = t.callExpression(
-                mockLocalIdentifier,
-                [ declaration ]
-              )
-              break
+      const queue = new Map()
+      function enqueue(path, replacement) {
+        const list = queue.get(path) || []
+        list.push(replacement)
+        queue.set(path, list.slice())
+        return list
+      }
 
-            case childPath.isExportNamedDeclaration():
-              specifiers = childPath.node.specifiers;
-              if(specifiers) {
-                specifiers.forEach(function(specifier) {
-                  mockedExportIdentifier = path.scope.generateUidIdentifier(specifier.local.name);
-                  childPath.insertBefore(t.variableDeclaration(
-                    "const",
-                    [ t.variableDeclarator(
-                      mockedExportIdentifier,
-                      t.callExpression(
-                        mockLocalIdentifier,
-                        [ specifier.local ]
-                      )
-                    )]
-                  ));
-                  specifier.local = mockedExportIdentifier;
-                });
-              }
+      path.traverse({
+        /** ExportDefaultDeclaration Visitor */
+        ExportDefaultDeclaration: new ExportDefaultDeclarationVisitor({enqueue, mock, moduleName, scope}),
 
-              declaration = childPath.node.declaration;
-              if(declaration) {
-                mockedExportIdentifier = path.scope.generateUidIdentifier(declaration.id.name);
-                childPath.insertBefore(declaration);
-                childPath.insertBefore(t.variableDeclaration(
-                  "const",
-                  [ t.variableDeclarator(
-                    mockedExportIdentifier,
-                    t.callExpression(
-                      mockLocalIdentifier,
-                      [ declaration.id ]
-                    )
-                  )]
-                ));
-                childPath.node.declaration = null;
-                childPath.node.specifiers.push(t.exportSpecifier(mockedExportIdentifier, declaration.id));
-              }
+        /** ExportNamedDeclaration Visitor */
+        ExportNamedDeclaration: new ExportNamedDeclarationVisitor({enqueue, mock, moduleName, scope}),
+      })
 
-              break;
-          }
-        });
-
+      if(queue.size) {
+        path.get('body')[0].insertBefore(buildMocktailImport(mock))
+        queue.forEach((nodes, path) => path.replaceWithMultiple(nodes))
       }
     },
   }
 
-  return { visitor: ProgramVisitor }
+  return { visitor }
 }

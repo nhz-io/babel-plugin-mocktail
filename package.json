@@ -11,9 +11,14 @@
   "files": [
     "lib/"
   ],
+  "dependencies": {
+    "babel-core": "^6.5.2",
+    "camelcase": "^2.1.0",
+    "uppercamelcase": "^1.1.0",
+    "path": "^0.12.7"
+  },
   "devDependencies": {
     "babel-cli": "*",
-    "babel-core": "^6.5.2",
     "babel-eslint": "*",
     "babel-preset-es2015": "*",
     "babel-preset-stage-0": "*",
@@ -34,11 +39,11 @@
     "lint": "eslint src test",
     "prebuild": "npm run clean -s",
     "build": "npm run lint && babel src -d lib",
-    "test": "mocha --recursive --require babel-core/register ./test/unit",
+    "test": "mocha --require babel-core/register ./test/*.js",
     "travis": "npm run-script clean && npm run-script build && npm run-script coveralls",
     "test:watch": "npm run test -- --watch",
     "prepublish": "npm run build -s",
-    "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot --recursive test/unit",
+    "coverage": "babel-node ./node_modules/isparta/bin/isparta cover node_modules/mocha/bin/_mocha  -- --reporter dot ./test/*.js",
     "coveralls": "npm run-script coverage -s && node node_modules/coveralls/bin/coveralls < ./coverage/lcov.info",
     "postcoveralls": "rm -rf ./coverage",
     "postpublish": "git push origin master --follow-tags",
